@@ -17,6 +17,7 @@ print("\nWhen the battle starts, type the attack you want to use and hit enter t
 time.sleep(3)
 
 #set up variables
+attack = ""
 HP1 = 1000 #player health
 HP2 = 1000 #bot health
 SP1 = 2 #player stamina
@@ -93,7 +94,7 @@ while HP1 > 0 and HP2 > 0:
     print("Player's turn")
     armor1 = False #player has armor ready
     barrier1 = False #player has barrier ready
-    while attack != end:
+    while attack != "end":
         attack = input("\nEnter attack:\n")
         if str(attack.capitalize()) == "Sword" and str(attack.capitalize()) == str(moveset1[0].capitalize()):
             if armor2 == False:
