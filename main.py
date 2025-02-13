@@ -21,16 +21,15 @@ time.sleep(3)
 
 
 #set up variables
-class effect:
-    def __init__(self, name:str, damage:int, heal:int, turns:int=0):
+class Effect:
+    def __init__(self, name:str, healthchange:int, turns:int=0):
         self.name = name
         self.active = False
         self.turns = turns
-        self.damage = damage
-        self.heal = heal
+        self.healthchange = healthchange
         pass
 
-class player:
+class Player:
     def __init__(self, name):
         self.name = name
         self.hp = 1000
@@ -44,14 +43,16 @@ class player:
         self.regen = Effect("regen")
         self.finisher = False
 
-class action:
-    def __init__(self, target, type, damage, sp, effect = ""):
+class Action:
+    def __init__(self, target, type, healthchange, sp, effectchance, effect = ""):
         self.target = target
         self.type = type #physical weapon attack, magic attack, healing, finisher, armor
-        self.damage:int = damage
+        self.healthchange:int = healthchange
         self.stamina_cost = sp
+        self.effectchance = effectchance
         if effect: 
             self.effect = Effect(effect)
+
 
 
 
