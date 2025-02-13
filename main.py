@@ -30,7 +30,7 @@ class Effect:
         pass
 
 class Player:
-    def __init__(self, name):
+    def __init__(self, name, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
         self.sp = 2
@@ -42,6 +42,7 @@ class Player:
         self.barrier = False
         self.regen = Effect("regen")
         self.finisher = False
+        self.moveset = [weapon, spell, shield, potion, finisher]
 
 class Action:
     def __init__(self, target, type, healthchange, sp, effectchance, effect = ""):
@@ -52,6 +53,7 @@ class Action:
         self.effectchance = effectchance
         if effect: 
             self.effect = Effect(effect)
+            self.effectchance = effectchance
 
 
 
@@ -64,38 +66,68 @@ spells = config["spells"]
 shields = config["shields"]
 potions = config["potions"]
 finishers = config["finishers"]
-moveset1 = ["weapon", "spell", "shield", "potion", "finisher"] #player's moveset 
-moveset2 = ["weapon", "spell", "shield", "potion", "finisher"] #bot's moveset
 time.sleep(0.5)
 
 #player chooses moves
-moveset1[0] = str(input("Select a Weapon: \nSword: deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer: 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger: deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow: hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets: deals 70 HP, 1 SP\n"))
+
+player = Player(input("Enter Username:\n"))
+
+player.moveset[0] = str(input("Select a Weapon: \nSword: deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer: 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger: deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow: hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets: deals 70 HP, 1 SP\n"))
 time.sleep(0.5)
-moveset1[1] = str(input("Select a Spell: \nIgnis: deals 30 HP, 50% chance to inflict burn, 1 SP\nGlacies: deals 30 HP, opponent loses 1/2 SP, 1 SP \nTempestas: hits 1 to 3 times, each hit deals 30 HP, 1 SP\nVenenum: deals 30 HP, 50% chance to inflict poison, 1 SP\nVocare: deals 30 HP, inflicts summon effect, 1 SP\n"))
+player.moveset[1] = str(input("Select a Spell: \nIgnis: deals 30 HP, 50% chance to inflict burn, 1 SP\nGlacies: deals 30 HP, opponent loses 1/2 SP, 1 SP \nTempestas: hits 1 to 3 times, each hit deals 30 HP, 1 SP\nVenenum: deals 30 HP, 50% chance to inflict poison, 1 SP\nVocare: deals 30 HP, inflicts summon effect, 1 SP\n"))
 time.sleep(0.5)
-moveset1[2] = str(input("Select a Shield: \nArmor: next weapon attack deals 50 less HP\nBarrier: next spell attack deals 50 less HP\n"))
+player.moveset[2] = str(input("Select a Shield: \nArmor: next weapon attack deals 50 less HP\nBarrier: next spell attack deals 50 less HP\n"))
 time.sleep(0.5)
-moveset1[3] = str(input("Select a Potion: \nHeal: heal 100 HP\nRegen: for the next 3 turns, heal 50 HP\nCure: heal 50 HP and remove effects\n"))
+player.moveset[3] = str(input("Select a Potion: \nHeal: heal 100 HP\nRegen: for the next 3 turns, heal 50 HP\nCure: heal 50 HP and remove effects\n"))
 time.sleep(0.5)
-moveset1[4] = str(input("Select a Finisher: \nLethal Execution: deals 500 HP, inflicts bleed, 2 SP\nMagus Exponentia Inspiratione: hits 1-3 times, each hit deals 200 HP, inflicts burn and poison, opponent loses 1/2 SP, 2 SP\nSteel-Fist Beatdown: hits 1-10 times, each hit deals 100 HP, 2 SP\n"))
+player.moveset[4] = str(input("Select a Finisher: \nLethal Execution: deals 500 HP, inflicts bleed, 2 SP\nMagus Exponentia Inspiratione: hits 1-3 times, each hit deals 200 HP, inflicts burn and poison, opponent loses 1/2 SP, 2 SP\nSteel-Fist Beatdown: hits 1-10 times, each hit deals 100 HP, 2 SP\n"))
 time.sleep(0.5)
-print(moveset1)
+print(player.moveset)
 
 #bot chooses moves
-randomNum = random.randint(1,5)
-moveset2[0] = weapons[randomNum-1]
+
+cpu = Player("CPU")
 
 randomNum = random.randint(1,5)
-moveset2[1] = spells[randomNum-1]
+cpu.moveset[0] = weapons[randomNum-1]
+
+randomNum = random.randint(1,5)
+cpu.moveset[1] = spells[randomNum-1]
 
 randomNum = random.randint(1,2)
-moveset2[2] = shields[randomNum-1]
+cpu.moveset[2] = shields[randomNum-1]
 
 randomNum = random.randint(1,3)
-moveset2[3] = potions[randomNum-1]
+cpu.moveset[3] = potions[randomNum-1]
     
 randomNum = random.randint(1,3)
-moveset2[4] = finishers[randomNum-1]
+cpu.moveset[4] = finishers[randomNum-1]
+
+
+run = True #flag that keeps the game running
+myturn = True #flag that tracks turn
+while run and player.hp > 0 and computer.hp > 0:
+    
+    while myturn:
+        #my turn here
+            #ask for which attack to do &verify
+            #perform the attack (print damage done, effects, and update the target)
+        #conditions to end turn: skip the rest of your turn or run out of stamina
+        myturn = False
+    
+    while not myturn:
+        #computer turn here
+
+        #conditions to end turn: skip the rest of your turn or run out of stamina
+        myturn = True
+    
+#print gameover: 
+if player.hp <= 0:
+    print("Player died!")
+
+if computer.hp <=0:
+    print("Computer died!")
+
 
 
 #start battle
