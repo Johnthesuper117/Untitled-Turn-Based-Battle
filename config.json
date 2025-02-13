@@ -1,0 +1,7 @@
+{
+  "weapons": ["Sword", "Hammer", "Dagger", "Bow and Arrows", "Gauntlets"],
+  "spells": ["Ignis", "Glacies", "Tempestas", "Venenum", "Vocare"],
+  "shields": ["Armor", "Barrier"],
+  "potions": ["Heal", "Regen", "Cure"],
+  "finishers": ["Lethal Execution", "Magus Exponentia Inspiratione", "Steel-Fist Beatdown"]
+}
