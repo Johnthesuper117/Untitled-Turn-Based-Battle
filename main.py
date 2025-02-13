@@ -8,11 +8,6 @@ import json
 with open('config.json') as config_file:
     config = json.load(config_file)
 
-WEAPONS = config["weapons"]
-SPELLS = config["spells"]
-SHIELDS = config["shields"]
-POTIONS = config["potions"]
-FINISHERS = config["finishers"]
 #intro, rules, and how to play
 print("Hello and Welcome to Untitled Turn-Based Battle version Alpha")
 time.sleep(1)
@@ -25,44 +20,33 @@ time.sleep(3)
 print("\nWhen the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP")
 time.sleep(3)
 
+
 #set up variables
-attack = ""
-HP1 = 1000 #player health
-HP2 = 1000 #bot health
-SP1 = 2 #player stamina
-SP2 = 2 #bot stamina
-burn1 = False #player is burned
-burn2 = False #bot is burned
-burnT1 = 0 #turns till burn is removed from player
-burnT2 = 0 #turns till burn is removed from bot
-poison1 = False #player is poisoned
-poison2 = False #bot is poisoned
-poisonT1 = 0 #turns till poison is removed from player
-poisonT2 = 0 #turns till poison is removed from bot
-bleed1 = False #player is bleeding
-bleed2 = False #bot is bleeding
-bleedT1 = 0 #turns till bleed is removed from player
-bleedT2 = 0 #turns till bleed is removed from bot
-summon1 = False #player is attacked by summon
-summon2 = False #bot is attacked by summon
-armor1 = False #player has armor ready
-armor2 = False #bot has armor ready
-barrier1 = False #player has barrier ready
-barrier2 = False #bot has barrier ready
-regen1 = False #player is regenerating
-regen2 = False #bot is regenerating
-regenT1 = 0 #turns till regen removed from player
-regenT2 = 0 #turns till regen removed from bot
-finisher1 = False #player has used their finisher
-finisher2 = False #bot has used their finisher
+class effect:
+    active = False
+    turns = 0
+
+class player:
+    attack = ""
+    HP = 1000 #player health
+    SP = 2 #player stamina
+    burn = effect()
+    poison = effect()
+    bleed = effect()
+    summon = effect()
+    armor = effect()
+    barrier = effect()
+    regen = effect()
+    finisher = False #player has used their finisher
+
 time.sleep(0.5)
 
 #set up lists
-WEAPONS = config["weapons"]
-SPELLS = config["spells"]
-SHIELDS = config["shields"]
-POTIONS = config["potions"]
-FINISHERS = config["finishers"]
+weapons = config["weapons"]
+spells = config["spells"]
+shields = config["shields"]
+potions = config["potions"]
+finishers = config["finishers"]
 moveset1 = ["weapon", "spell", "shield", "potion", "finisher"] #player's moveset 
 moveset2 = ["weapon", "spell", "shield", "potion", "finisher"] #bot's moveset
 time.sleep(0.5)
