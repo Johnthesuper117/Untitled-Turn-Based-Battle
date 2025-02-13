@@ -3,7 +3,16 @@
 #import stuff
 import time
 import random
+import json
 
+with open('config.json') as config_file:
+    config = json.load(config_file)
+
+WEAPONS = config["weapons"]
+SPELLS = config["spells"]
+SHIELDS = config["shields"]
+POTIONS = config["potions"]
+FINISHERS = config["finishers"]
 #intro, rules, and how to play
 print("Hello and Welcome to Untitled Turn-Based Battle version Alpha")
 time.sleep(1)
@@ -49,11 +58,11 @@ finisher2 = False #bot has used their finisher
 time.sleep(0.5)
 
 #set up lists
-weapons = ["Sword", "Hammer", "Dagger", "Bow and Arrows", "Gauntlets"]
-spells = ["Ignis", "Glacies", "Tempestas", "Venenum" "Vocare"]
-shields = ["Armor", "Barrier"]
-potions = ["Heal", "Regen", "Cure"]
-finishers = ["Lethal Execution", "Magus Exponentia Inspiratione", "Steel-Fist Beatdown"]
+WEAPONS = config["weapons"]
+SPELLS = config["spells"]
+SHIELDS = config["shields"]
+POTIONS = config["potions"]
+FINISHERS = config["finishers"]
 moveset1 = ["weapon", "spell", "shield", "potion", "finisher"] #player's moveset 
 moveset2 = ["weapon", "spell", "shield", "potion", "finisher"] #bot's moveset
 time.sleep(0.5)
