@@ -1,9 +1,8 @@
 #debug game and make sure every move works as intended, send to uncle Tim and David to test and give feedback, afterwards add finishing touches and last wave of testing, then release as finished version
 
 #import stuff
-import time
-import random
-import json
+import time, random, json
+
 
 with open('config.json') as config_file:
     config = json.load(config_file)
@@ -23,21 +22,38 @@ time.sleep(3)
 
 #set up variables
 class effect:
-    active = False
-    turns = 0
+    def __init__(self, name:str, damage:int, heal:int, turns:int=0):
+        self.name = name
+        self.active = False
+        self.turns = turns
+        self.damage = damage
+        self.heal = heal
+        pass
 
 class player:
-    attack = ""
-    HP = 1000 #player health
-    SP = 2 #player stamina
-    burn = effect()
-    poison = effect()
-    bleed = effect()
-    summon = effect()
-    armor = effect()
-    barrier = effect()
-    regen = effect()
-    finisher = False #player has used their finisher
+    def __init__(self, name):
+        self.name = name
+        self.hp = 1000
+        self.sp = 2
+        self.burn = Effect("burn")
+        self.bleed = Effect("bleed")
+        self.poison = Effect("poison")
+        self.summon = False
+        self.armor = False
+        self.barrier = False
+        self.regen = Effect("regen")
+        self.finisher = False
+
+class action:
+    def __init__(self, target, type, damage, sp, effect = ""):
+        self.target = target
+        self.type = type #physical weapon attack, magic attack, healing, finisher, armor
+        self.damage:int = damage
+        self.stamina_cost = sp
+        if effect: 
+            self.effect = Effect(effect)
+
+
 
 time.sleep(0.5)
 
@@ -557,7 +573,3 @@ if HP1 > 0:
     print("\nYou win!\nCPU lost!")
 elif HP2 > 0:
     print("\nCPU wins!\n You lose!")
-
-
-
-
