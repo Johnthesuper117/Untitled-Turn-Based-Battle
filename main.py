@@ -22,7 +22,7 @@ time.sleep(3)
 
 #set up variables
 class Effect:
-    def __init__(self, name:str, healthchange:int, turns:int=0):
+    def __init__(self, name:str, healthchange:int, turns:int):
         self.name = name
         self.active = False
         self.turns = turns
@@ -30,17 +30,17 @@ class Effect:
         pass
 
 class Player:
-    def __init__(self, name, weapon:str, spell:str, shield:str, potion:str, finisher:str):
+    def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
         self.sp = 2
-        self.burn = Effect("burn")
-        self.bleed = Effect("bleed")
-        self.poison = Effect("poison")
+        self.burn = Effect("burn", "0", "0")
+        self.bleed = Effect("bleed", "0", "0")
+        self.poison = Effect("poison", "0", "0")
         self.summon = False
         self.armor = False
         self.barrier = False
-        self.regen = Effect("regen")
+        self.regen = Effect("regen", "0", "0")
         self.finisher = False
         self.moveset = [weapon, spell, shield, potion, finisher]
 
@@ -69,8 +69,8 @@ finishers = config["finishers"]
 time.sleep(0.5)
 
 #player chooses moves
-
-player = Player(input("Enter Username:\n"))
+#
+player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
 
 player.moveset[0] = str(input("Select a Weapon: \nSword: deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer: 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger: deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow: hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets: deals 70 HP, 1 SP\n"))
 time.sleep(0.5)
@@ -86,7 +86,7 @@ print(player.moveset)
 
 #bot chooses moves
 
-cpu = Player("CPU")
+cpu = Player("CPU", 'weapon', 'spell', 'shield', 'potion', 'finisher')
 
 randomNum = random.randint(1,5)
 cpu.moveset[0] = weapons[randomNum-1]
@@ -106,18 +106,21 @@ cpu.moveset[4] = finishers[randomNum-1]
 
 run = True #flag that keeps the game running
 myturn = True #flag that tracks turn
-while run and player.hp > 0 and computer.hp > 0:
+while run and player.hp > 0 and cpu.hp > 0:
     
     while myturn:
         #my turn here
             #ask for which attack to do &verify
             #perform the attack (print damage done, effects, and update the target)
         #conditions to end turn: skip the rest of your turn or run out of stamina
+        attack = input("\nEnter attack:\n")
+        if attack.upper() == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
+            print(attack.upper())
         myturn = False
     
     while not myturn:
         #computer turn here
-
+        print("CPU's turn")
         #conditions to end turn: skip the rest of your turn or run out of stamina
         myturn = True
     
