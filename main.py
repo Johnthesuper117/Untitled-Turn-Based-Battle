@@ -29,15 +29,22 @@ class Effect:
         self.healthchange = healthchange
         pass
 
+Bleed = Effect("Bleed", -10, 10)
+Burn = Effect("Burn", -50, 3)
+Poison = Effect("Poison", -30, 5)
+Regen = Effect("Regen", , )
+Summon = Effect("Summon", -100, 1)
+
+
 class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
         self.sp = 2
-        self.burn = Effect("burn", "0", "0")
-        self.bleed = Effect("bleed", "0", "0")
-        self.poison = Effect("poison", "0", "0")
-        self.summon = False
+        self.bleed = Bleed()
+        self.burn = Burn()
+        self.poison = Poison()
+        self.summon = Summon()
         self.armor = False
         self.barrier = False
         self.regen = Effect("regen", "0", "0")
