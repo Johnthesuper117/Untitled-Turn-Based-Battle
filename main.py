@@ -118,16 +118,19 @@ while run and player.hp > 0 and cpu.hp > 0:
             #perform the attack (print damage done, effects, and update the target)
         #conditions to end turn: skip the rest of your turn or run out of stamina
         attack = input("\nEnter attack:\n")
-        if attack.upper() == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
+        if attack.upper() == player.moveset[0] or attack.upper() == player.moveset[1] or attack.upper() == player.moveset[2] or attack.upper() == player.moveset[3] or attack.upper() == player.moveset[4]:
             print(attack.upper())
+            print(f"{player.moveset[]}")
             player.hp += attack.upper.heal
             computer.hp -= attack.upper.hurt
-
-        myturn = False
+        elif attack.upper() == 'END' or player.sp == 0:
+            myturn = False
+            print("End of Player's Turn")
     
     while not myturn:
         #computer turn here
         print("CPU's turn")
+        
         #conditions to end turn: skip the rest of your turn or run out of stamina
         myturn = True
     
