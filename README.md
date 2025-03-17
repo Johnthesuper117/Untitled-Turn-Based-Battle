@@ -17,6 +17,6 @@ Burn: lose 50 HP at the end of your turn, lasts 3 turns
 
 Poison: lose 30 HP at the end of your turn, lasts 5 turns
 
-Summon: at the end of your turn, lose 30 HP
+Summon: at the end of your turn, lose 100 HP
 
 When the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP")
