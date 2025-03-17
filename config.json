@@ -1,7 +1,13 @@
 {
   "weapons": [
-    "SWORD": [{
-    }], 
+    "SWORD": [
+    {
+        "damage": 50,
+        "effect": "bleed",
+        "effectChance": "50%",
+        "sp": 1
+    }
+    ], 
     "HAMMER", 
     "DAGGER", 
     "BOW", 
