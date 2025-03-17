@@ -71,6 +71,7 @@ sleep(0.5)
 
 #set up moves
 
+print(weapons)
 
 #player chooses moves
 #
@@ -120,7 +121,6 @@ while run and player.hp > 0 and cpu.hp > 0:
         attack = input("\nEnter attack:\n")
         if attack.upper() == player.moveset[0] or attack.upper() == player.moveset[1] or attack.upper() == player.moveset[2] or attack.upper() == player.moveset[3] or attack.upper() == player.moveset[4]:
             print(attack.upper())
-            print(f"{player.moveset[]}")
             player.hp += attack.upper.heal
             computer.hp -= attack.upper.hurt
         elif attack.upper() == 'END' or player.sp == 0:
