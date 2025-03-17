@@ -121,8 +121,6 @@ while run and player.hp > 0 and cpu.hp > 0:
         print(attack)
         if attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
-            player.hp += 
-            computer.hp -= 
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
