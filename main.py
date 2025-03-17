@@ -32,22 +32,22 @@ class Effect:
 Bleed = Effect("Bleed", -10, 10)
 Burn = Effect("Burn", -50, 3)
 Poison = Effect("Poison", -30, 5)
-Regen = Effect("Regen", , )
+Regen = Effect("Regen", 50, 3)
 Summon = Effect("Summon", -100, 1)
-
 
 class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
-        self.sp = 2
+        self.defence = 0
+        self.sp = 2.0
         self.bleed = Bleed()
         self.burn = Burn()
         self.poison = Poison()
         self.summon = Summon()
         self.armor = False
         self.barrier = False
-        self.regen = Effect("regen", "0", "0")
+        self.regen = Regen()
         self.finisher = False
         self.moveset = [weapon, spell, shield, potion, finisher]
 
@@ -84,15 +84,15 @@ print(weapons)
 #
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
 
-player.moveset[0] = str(input("Select a Weapon: \nSword: deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer: 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger: deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow: hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets: deals 70 HP, 1 SP\n"))
+player.moveset[0] = str(input(f"Select a Weapon: \nSword: deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer: 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger: deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow: hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets: deals 70 HP, 1 SP\n"))
 sleep(0.5)
-player.moveset[1] = str(input("Select a Spell: \nIgnis: deals 30 HP, 50% chance to inflict burn, 1 SP\nGlacies: deals 30 HP, opponent loses 1/2 SP, 1 SP \nTempestas: hits 1 to 3 times, each hit deals 30 HP, 1 SP\nVenenum: deals 30 HP, 50% chance to inflict poison, 1 SP\nVocare: deals 30 HP, inflicts summon effect, 1 SP\n"))
+player.moveset[1] = str(input(f"Select a Spell: \nIgnis: deals 30 HP, 50% chance to inflict burn, 1 SP\nGlacies: deals 30 HP, opponent loses 1/2 SP, 1 SP \nTempestas: hits 1 to 3 times, each hit deals 30 HP, 1 SP\nVenenum: deals 30 HP, 50% chance to inflict poison, 1 SP\nVocare: deals 30 HP, inflicts summon effect, 1 SP\n"))
 sleep(0.5)
-player.moveset[2] = str(input("Select a Shield: \nArmor: next weapon attack deals 50 less HP\nBarrier: next spell attack deals 50 less HP\n"))
+player.moveset[2] = str(input(f"Select a Shield: \nArmor: next weapon attack deals 50 less HP\nBarrier: next spell attack deals 50 less HP\n"))
 sleep(0.5)
-player.moveset[3] = str(input("Select a Potion: \nHeal: heal 100 HP\nRegen: for the next 3 turns, heal 50 HP\nCure: heal 50 HP and remove effects\n"))
+player.moveset[3] = str(input(f"Select a Potion: \nHeal: heal 100 HP\nRegen: for the next 3 turns, heal 50 HP\nCure: heal 50 HP and remove effects\n"))
 sleep(0.5)
-player.moveset[4] = str(input("Select a Finisher: \nLethal Execution: deals 500 HP, inflicts bleed, 2 SP\nMagus Exponentia Inspiratione: hits 1-3 times, each hit deals 200 HP, inflicts burn and poison, opponent loses 1/2 SP, 2 SP\nSteel-Fist Beatdown: hits 1-10 times, each hit deals 100 HP, 2 SP\n"))
+player.moveset[4] = str(input(f"Select a Finisher: \nLethal Execution: deals 500 HP, inflicts bleed, 2 SP\nMagus Exponentia Inspiratione: hits 1-3 times, each hit deals 200 HP, inflicts burn and poison, opponent loses 1/2 SP, 2 SP\nSteel-Fist Beatdown: hits 1-10 times, each hit deals 100 HP, 2 SP\n"))
 sleep(0.5)
 print(player.moveset)
 
