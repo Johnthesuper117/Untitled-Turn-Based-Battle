@@ -29,25 +29,19 @@ class Effect:
         self.healthchange = healthchange
         pass
 
-Bleed = Effect("Bleed", -10, 10)
-Burn = Effect("Burn", -50, 3)
-Poison = Effect("Poison", -30, 5)
-Regen = Effect("Regen", 50, 3)
-Summon = Effect("Summon", -100, 1)
-
 class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
         self.defence = 0
         self.sp = 2.0
-        self.bleed = Bleed()
-        self.burn = Burn()
-        self.poison = Poison()
-        self.summon = Summon()
+        self.bleed = Effect("Bleed", -10, 10)
+        self.burn = Effect("Burn", -50, 3)
+        self.poison = Effect("Poison", -30, 5)
+        self.summon = Effect("Summon", -100, 1)
         self.armor = False
         self.barrier = False
-        self.regen = Regen()
+        self.regen = Effect("Regen", 50, 3)
         self.finisher = False
         self.moveset = [weapon, spell, shield, potion, finisher]
 
@@ -77,8 +71,6 @@ finishers = config["finishers"]
 sleep(0.5)
 
 #set up moves
-
-print(weapons)
 
 #player chooses moves
 #
