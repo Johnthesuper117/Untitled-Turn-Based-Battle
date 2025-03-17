@@ -1,17 +1,45 @@
 {
   "weapons": [
-    "SWORD": [
+     "SWORD": [
     {
         "damage": 50,
         "effect": "bleed",
         "effectChance": "50%",
+        "sp": 1.0
+    }
+    ], 
+      "HAMMER": [
+    {
+        "damage": 100,
+        "effect": "hit",
+        "effectChance": "50%",
+        "sp": 1.0
+    }
+    ], 
+      "DAGGER": [
+    {
+        "damage": 2,
+        "effect": "hit",
+        "effectChance": "100%",
+        "sp": 0.5
+    }
+    ], 
+      "BOW": [
+    {
+        "damage": 20,
+        "effect": "multihit",
+        "effectChance": "20%",
         "sp": 1
     }
     ], 
-    "HAMMER", 
-    "DAGGER", 
-    "BOW", 
-    "GAUNTLETS"
+      "GAUNTLETS": [
+    {
+        "damage": 80,
+        "effect": "hit",
+        "effectChance": "100%",
+        "sp": 1
+    }
+    ]
   ],
   "spells": ["IGNIS", "Glacies", "Tempestas", "Venenum", "Vocare"],
   "shields": ["Armor", "Barrier"],
