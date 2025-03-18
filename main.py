@@ -57,22 +57,30 @@ class Action:
             chance = random.randint(0, self.effectchance)
             self.effect = Effect(effect)
 
-sleep(0.5)
-
 #set up lists
 weapons = config["weapons"]
 spells = config["spells"]
 shields = config["shields"]
 potions = config["potions"]
 finishers = config["finishers"]
-sleep(0.5)
+
+#set up functions
+def Attack(turn, type, damage, effect):
+    if turn == "PLAYER":
+        damage -= cpu.defence
+        cpu.defence = 0
+        if damage <= 0:
+            pass
+        if cpu.bleed.turns > 0:
+            damage += 10
+        cpu.hp -= damage
+        if effect.upper() == "BLEED":
+            cpu.bleed == Effect("Bleed", -10, 10)
 
 #set up moves
-
 Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
 
 #player chooses moves
-#
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
 
 player.moveset[0] = str(input(f"Select a Weapon: \nSword: deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer: 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger: deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow: hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets: deals 70 HP, 1 SP\n"))
@@ -88,7 +96,6 @@ sleep(0.5)
 print(player.moveset)
 
 #bot chooses moves
-
 cpu = Player("CPU", 'weapon', 'spell', 'shield', 'potion', 'finisher')
 
 randomNum = random.randint(1,5)
@@ -112,6 +119,7 @@ myturn = True #flag that tracks turn
 while run and player.hp > 0 and cpu.hp > 0:
     
     while myturn:
+        print("Player's turn")
         #my turn here
             #ask for which attack to do &verify
             #perform the attack (print damage done, effects, and update the target)
@@ -120,6 +128,8 @@ while run and player.hp > 0 and cpu.hp > 0:
         print(attack)
         if attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
+            if attack == "SWORD":
+                Attack("PLAYER", Sword.type, Sword.damage, Sword.effect)
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
