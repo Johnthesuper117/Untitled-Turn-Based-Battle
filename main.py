@@ -35,13 +35,13 @@ class Player:
         self.hp = 1000
         self.defence = 0
         self.sp = 2.0
-        self.bleed = Effect("Bleed", -10, 10)
-        self.burn = Effect("Burn", -50, 3)
-        self.poison = Effect("Poison", -30, 5)
-        self.summon = Effect("Summon", -100, 1)
+        self.bleed = Effect("Bleed", 0, 0)
+        self.burn = Effect("Burn", 0, 0)
+        self.poison = Effect("Poison", 0, 0)
+        self.summon = Effect("Summon", 0, 0)
         self.armor = False
         self.barrier = False
-        self.regen = Effect("Regen", 50, 3)
+        self.regen = Effect("Regen", 0, 0)
         self.finisher = False
         self.moveset = [weapon, spell, shield, potion, finisher]
 
@@ -54,11 +54,8 @@ class Action:
         self.stamina_cost = sp
         self.effectchance = effectchance
         if effect: 
+            chance = random.randint(0, self.effectchance)
             self.effect = Effect(effect)
-            self.effectchance = effectchance
-
-
-
 
 sleep(0.5)
 
@@ -71,6 +68,8 @@ finishers = config["finishers"]
 sleep(0.5)
 
 #set up moves
+
+Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
 
 #player chooses moves
 #
