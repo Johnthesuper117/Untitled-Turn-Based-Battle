@@ -11,12 +11,12 @@ Rules: Both players have 1000 health, or HP and 2 stamina points, or SP. Each at
 
 Effects: 
 
-Bleed: lose 10 HP every turn + 10 HP for every hit taken, lasts 10 turns or until healed
+ - Bleed: lose 10 HP every turn + 10 HP for every hit taken, lasts 10 turns or until healed
 
-Burn: lose 50 HP at the end of your turn, lasts 3 turns
+ - Burn: lose 50 HP at the end of your turn, lasts 3 turns
 
-Poison: lose 30 HP at the end of your turn, lasts 5 turns
+ - Poison: lose 30 HP at the end of your turn, lasts 5 turns
 
-Summon: at the end of your turn, lose 100 HP
+ - Summon: at the end of your turn, lose 100 HP
 
-When the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP")
+When the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP
