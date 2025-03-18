@@ -1,7 +1,7 @@
 {
   "weapons": ["SWORD", "HAMMER", "DAGGER", "BOW", "GAUNTLETS"],
-  "spells": ["IGNIS", "Glacies", "Tempestas", "Venenum", "Vocare"],
-  "shields": ["Armor", "Barrier"],
-  "potions": ["HEAL", "Regen", "Cure"],
-  "finishers": ["Lethal Execution", "Magus Exponentia Inspiratione", "Steel-Fist Beatdown"]
+  "spells": ["IGNIS", "GLACIES", "TEMPESTAS", "VENENUM", "VOCARE"],
+  "shields": ["ARMOR", "BARRIER"],
+  "potions": ["HEAL", "REGEN", "CURE"],
+  "finishers": ["LETHAL EXECUTION", "MAGUS EXPONENTIA INSPIRATIONE", "STEEL-FIST BEATDOWN"]
 }
