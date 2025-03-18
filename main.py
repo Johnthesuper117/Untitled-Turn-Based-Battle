@@ -144,7 +144,7 @@ while run and player.hp > 0 and cpu.hp > 0:
         #conditions to end turn: skip the rest of your turn or run out of stamina
         attack = input("\nEnter attack:\n").upper()
         print(attack)
-        if attack[0] != player.moveset[0] or player.moveset[1] != player.moveset[1] or player.moveset[2] != player.moveset[2] or player.moveset[3] != player.moveset[3] or player.moveset[4] != player.moveset[4]:
+        if attack[0] != player.moveset[0] or attack[1] != player.moveset[1] or attack[2] != player.moveset[2] or attack[3] != player.moveset[3] or attack[4] != player.moveset[4]:
             attack = player.moveset[player.moveset]
         if attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
