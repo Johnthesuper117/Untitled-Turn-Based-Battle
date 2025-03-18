@@ -55,7 +55,7 @@ class Action:
         self.effectchance = effectchance
         if effect: 
             chance = random.randint(0, self.effectchance)
-            self.effect = Effect(effect)
+            self.effect = effect
 
 #set up lists
 weapons = config["weapons"]
