@@ -64,18 +64,6 @@ shields = config["shields"]
 potions = config["potions"]
 finishers = config["finishers"]
 
-#set up functions
-def Attack(turn, type, damage, effect):
-    if turn == "PLAYER":
-        damage -= cpu.defence
-        cpu.defence = 0
-        if damage <= 0:
-            pass
-        if cpu.bleed.turns > 0:
-            damage += 10
-        cpu.hp -= damage
-        if effect.upper() == "BLEED":
-            cpu.bleed == Effect("Bleed", -10, 10)
 
 #set up moves
 Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
@@ -113,6 +101,22 @@ cpu.moveset[3] = potions[randomNum-1]
 randomNum = random.randint(1,3)
 cpu.moveset[4] = finishers[randomNum-1]
 
+#set up functions
+def Attack(turn, type, damage, effect):
+    if turn == "PLAYER":
+        damage -= cpu.defence
+        cpu.defence = 0
+        print(f"{player.name} Broke CPU's Defences")
+        if damage <= 0:
+            pass
+        if cpu.bleed.turns > 0:
+            damage += 10
+            print("CPU's wounds deepen")
+        cpu.hp -= damage
+        print(f"CPU took {damage}")
+        if effect.upper() == "BLEED":
+            cpu.bleed == Effect("Bleed", -10, 10)
+            print("CPU is bleeding")
 
 run = True #flag that keeps the game running
 myturn = True #flag that tracks turn
