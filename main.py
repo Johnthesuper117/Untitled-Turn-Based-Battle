@@ -136,5 +136,5 @@ while run and player.hp > 0 and cpu.hp > 0:
 if player.hp <= 0:
     print("Player died!")
 
-if computer.hp <=0:
+if cpu.hp <=0:
     print("Computer died!")
