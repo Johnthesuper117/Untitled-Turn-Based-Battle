@@ -67,6 +67,19 @@ finishers = config["finishers"]
 
 #set up moves
 Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
+Hammer = Action("", "weapon", 0, 100, 1, 50)
+Dagger = Action("", "weapon", 0, 20, 0.5, 100, "Bleed")
+Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
+Glacies = Action("", "spell", 0, 30, 1, 0)
+Tempestas = Action("", "spell", 0, 20, 1, 50)
+Armor = Action("", "shield", 0, 0, 1, 0)
+Barrier = Action("", "shield", 0, 0, 1, 0)
+Heal = Action("self", "potion", 100, 0, 1, 0)
+Regen = Action("self", "potion", 50, 0, 1, 0)
+Cure = Action("self", "potion", 50, 0, 1, 0)
+LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
+MagusExponentiaInspiratione = Action("", "finisher", 0, 200, 2, 50, "Burn")
+Ultima = Action("", "finisher", 0, 300, 2, 100, "Poison")
 
 #player chooses moves
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
@@ -129,8 +142,35 @@ def Attack(turn, type, damage, effect):
         cpu.hp -= damage
         print(f"CPU took {damage}")
         if effect.upper() == "BLEED":
-            cpu.bleed == Effect("Bleed", -10, 10)
+            cpu.bleed = Effect("Bleed", -10, 10)
             print("CPU is bleeding")
+        if effect.upper() == "BURN":
+            cpu.burn = Effect("Burn", -50, 3)
+            print("CPU is burning")
+        if effect.upper() == "POISON":
+            cpu.poison = Effect("Poison", -30, 5)
+            print("CPU is poisoned")
+    elif turn == "CPU":
+        damage -= player.defence
+        player.defence = 0
+        print(f"CPU Broke {player.name}'s Defences")
+        if damage <= 0:
+            pass
+        if player.bleed.turns > 0:
+            damage += 10
+            print(f"{player.name}'s wounds deepen")
+        player.hp -= damage
+        print(f"{player.name} took {damage}")
+        if effect.upper() == "BLEED":
+            player.bleed = Effect("Bleed", -10, 10)
+            print(f"{player.name} is bleeding")
+        if effect.upper() == "BURN":
+            player.burn = Effect("Burn", -50, 3)
+            print(f"{player.name} is burning")
+        if effect.upper() == "POISON":
+            player.poison = Effect("Poison", -30, 5)
+            print(f"{player.name} is poisoned")
+
 
 run = True #flag that keeps the game running
 myturn = True #flag that tracks turn
@@ -150,20 +190,55 @@ while run and player.hp > 0 and cpu.hp > 0:
             print(attack)
             if attack == "SWORD":
                 Attack("PLAYER", Sword.type, Sword.damage, Sword.effect)
+            
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
     
     while not myturn:
-        #computer turn here
         print("CPU's turn")
-        
-        #conditions to end turn: skip the rest of your turn or run out of stamina
+        cpu_attack = random.choice(cpu.moveset)
+        if cpu_attack == "SWORD":
+            Attack("CPU", Sword.type, Sword.damage, Sword.effect)
+        elif cpu_attack == "HAMMER":
+            Attack("CPU", Hammer.type, Hammer.damage, Hammer.effect)
+        elif cpu_attack == "DAGGER":
+            Attack("CPU", Dagger.type, Dagger.damage, Dagger.effect)
+        elif cpu_attack == "IGNIS":
+            Attack("CPU", Ignis.type, Ignis.damage, Ignis.effect)
+        elif cpu_attack == "GLACIES":
+            Attack("CPU", Glacies.type, Glacies.damage, Glacies.effect)
+        elif cpu_attack == "TEMPESTAS":
+            Attack("CPU", Tempestas.type, Tempestas.damage, Tempestas.effect)
+        elif cpu_attack == "ARMOR":
+            cpu.defence += 50
+            print("CPU raised its defense")
+        elif cpu_attack == "BARRIER":
+            cpu.defence += 50
+            print("CPU raised a barrier")
+        elif cpu_attack == "HEAL":
+            cpu.hp += Heal.heal
+            print("CPU healed itself for 100 HP")
+        elif cpu_attack == "REGEN":
+            cpu.regen = Effect("Regen", 50, 3)
+            print("CPU started regenerating")
+        elif cpu_attack == "CURE":
+            cpu.hp += Cure.heal
+            cpu.bleed = Effect("Bleed", 0, 0)
+            cpu.burn = Effect("Burn", 0, 0)
+            cpu.poison = Effect("Poison", 0, 0)
+            print("CPU healed and removed all effects")
+        elif cpu_attack == "LETHAL EXECUTION":
+            Attack("CPU", LethalExecution.type, LethalExecution.damage, LethalExecution.effect)
+        elif cpu_attack == "MAGUS EXPONENTIA INSPIRATIONE":
+            Attack("CPU", MagusExponentiaInspiratione.type, MagusExponentiaInspiratione.damage, MagusExponentiaInspiratione.effect)
+        elif cpu_attack == "ULTIMA":
+            Attack("CPU", Ultima.type, Ultima.damage, Ultima.effect)
         myturn = True
-    
-#print gameover: 
+
+# Print gameover
 if player.hp <= 0:
     print("Player died!")
 
-if cpu.hp <=0:
+if cpu.hp <= 0:
     print("Computer died!")
