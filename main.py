@@ -67,6 +67,12 @@ finishers = config["finishers"]
 
 #set up moves
 Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
+Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
+Armor = Action("", "shield", 0, 0, 1, 100, "armor")
+Heal = Action("", "potion", 100, 0, 1, 100, "hit")
+LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
+
+Moves = {"SWORD": Sword, "IGNIS": Ignis, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution}
 
 #player chooses moves
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
@@ -148,8 +154,7 @@ while run and player.hp > 0 and cpu.hp > 0:
             attack = player.moveset[int(attack)-1]
         if attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
-            if attack == "SWORD":
-                Attack("PLAYER", Sword.type, Sword.damage, Sword.effect)
+            Attack("PLAYER", Moves[attack].type, Moves[attack].damage, Moves[attack].effect)
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
