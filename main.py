@@ -67,12 +67,16 @@ finishers = config["finishers"]
 
 #set up moves
 Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
+Hammer = Action("", "weapon", 0, 100, 1, 50, "hit")
+Dagger = Action("", "weapon", 0, 50, 1, 100, "")
+BowandArrow = Action("", "weapon", 0, 20, 1, 20, "multiHit")
+Guantlets = Action("", "weapon", 0, 80, 1, 100, "")
 Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
 Armor = Action("", "shield", 0, 0, 1, 100, "armor")
-Heal = Action("", "potion", 100, 0, 1, 100, "hit")
+Heal = Action("", "potion", 100, 0, 1, 100, "")
 LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 
-Moves = {"SWORD": Sword, "IGNIS": Ignis, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution}
+Moves = {"SWORD": Sword, "HAMMER": Hammer, "DAGGER": Dagger, "BOW AND ARROW": BowandArrow, "GUANTLETS": Guantlets, "IGNIS": Ignis, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution}
 
 #player chooses moves
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
