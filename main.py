@@ -21,6 +21,8 @@ print("\nWhen the battle starts, type the attack you want to use and hit enter t
 
 
 #set up variables
+who = ""
+
 class Effect:
     def __init__(self, name:str, healthchange:int, turns:int):
         self.name = name
@@ -160,12 +162,13 @@ def Attack(turn, type, damage, effect):
             print(f"{player.name} summoned a wild beast")
 
 stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POSION": player.posion, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOSION": cpu.posion, "CPUSUMMON": cpu.summon}
+messages = {"BLEED": f"{who} is weakened by the loss of blood", "BURN": f"{who}'s burns cause severe pain", "POSION": f"{who} is impaired by the toxins", "SUMMON": f"The wild beast maims {who}", }
 
 def Status(who, effect):
     
     if stats[f"{who}{effect}"].turns > 0:
         stats[f"{who}"].hp -= stats[f"{who}{effect}"].healthchange
-        print(f"{who} is bleeding")
+        print(f"{messages[effect]}")
         stats[f"{who}{effect}"].turns -= 1
         
 
