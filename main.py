@@ -147,17 +147,26 @@ def Attack(turn, type, damage, effect):
         cpu.hp -= damage
         print(f"CPU took {damage}")
         if effect.upper() == "BLEED":
-            cpu.bleed == Effect("Bleed", -10, 10)
+            cpu.bleed = Effect("Bleed", -10, 10)
             print("CPU is bleeding")
         elif effect.upper() == "BURN":
-            cpu.bleed == Effect("Burn", -50, 3)
+            cpu.bleed = Effect("Burn", -50, 3)
             print("CPU is burning")
         elif effect.upper() == "POSION":
-            cpu.bleed == Effect("Posion", -30, 5)
+            cpu.bleed = Effect("Posion", -30, 5)
             print("CPU is posioned")
         elif effect.upper() == "SUMMON":
-            cpu.bleed == Effect("Summon", -100, 1)
-            print("")
+            cpu.bleed = Effect("Summon", -100, 1)
+            print(f"{player.name} summoned a wild beast")
+
+stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POSION": player.posion, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOSION": cpu.posion, "CPUSUMMON": cpu.summon}
+
+def Status(who, effect):
+    
+    if stats[f"{who}{effect}"].turns > 0:
+        stats[f"{who}"].hp -= stats[f"{who}{effect}"].healthchange
+        print(f"{who} is bleeding")
+        stats[f"{who}{effect}"].turns -= 1
         
 
 run = True #flag that keeps the game running
@@ -180,6 +189,7 @@ while run and player.hp > 0 and cpu.hp > 0:
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
+        Status(f"{player.name}", effect)
     
     while not myturn:
         #computer turn here
