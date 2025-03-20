@@ -1,5 +1,5 @@
 {
-  "weapons": ["SWORD", "HAMMER", "DAGGER", "BOW", "GAUNTLETS"],
+  "weapons": ["SWORD", "HAMMER", "DAGGER", "BOW AND ARROW", "GAUNTLETS"],
   "spells": ["IGNIS", "GLACIES", "TEMPESTAS", "VENENUM", "VOCARE"],
   "shields": ["ARMOR", "BARRIER"],
   "potions": ["HEAL", "REGEN", "CURE"],
