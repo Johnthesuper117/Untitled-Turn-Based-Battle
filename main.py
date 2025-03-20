@@ -46,6 +46,21 @@ class Player:
         self.regen = Effect("Regen", 0, 0)
         self.finisher = False
         self.moveset = [weapon, spell, shield, potion, finisher]
+        self.effects = []
+
+    @classmethod
+    def Effects():
+        if self.bleed.turns > 0:
+            self.effects.append(f"{self.bleed.name}")
+        if self.burn.turns > 0:
+            self.effects.append(f"{self.burn.name}")
+        if self.poison.turns > 0:
+            self.effects.append(f"{self.poison.name}")
+        if self.summon.turns > 0:
+            self.effects.append(f"{self.summon.name}")
+        if self.regen.turns > 0:
+            self.effects.append(f"{self.regen.name}")
+            
 
 class Action:
     def __init__(self, target, type, heal, damage, sp, effectchance, effect = ""):
@@ -154,15 +169,15 @@ def Attack(turn, type, damage, effect):
         elif effect.upper() == "BURN":
             cpu.bleed = Effect("Burn", -50, 3)
             print("CPU is burning")
-        elif effect.upper() == "POSION":
-            cpu.bleed = Effect("Posion", -30, 5)
-            print("CPU is posioned")
+        elif effect.upper() == "POISON":
+            cpu.bleed = Effect("Poison", -30, 5)
+            print("CPU is poisoned")
         elif effect.upper() == "SUMMON":
             cpu.bleed = Effect("Summon", -100, 1)
             print(f"{player.name} summoned a wild beast")
 
-stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POSION": player.posion, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOSION": cpu.posion, "CPUSUMMON": cpu.summon}
-messages = {"BLEED": f"{who} is weakened by the loss of blood", "BURN": f"{who}'s burns cause severe pain", "POSION": f"{who} is impaired by the toxins", "SUMMON": f"The wild beast maims {who}", }
+stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POISON": player.poison, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOISON": cpu.poison, "CPUSUMMON": cpu.summon}
+messages = {"BLEED": f"{who} is weakened by the loss of blood", "BURN": f"{who}'s burns cause severe pain", "POISON": f"{who} is impaired by the toxins", "SUMMON": f"The wild beast maims {who}", }
 
 def Status(who, effect):
     
@@ -192,7 +207,8 @@ while run and player.hp > 0 and cpu.hp > 0:
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
-        Status(f"{player.name}", effect)
+        for effect in player.effects
+            Status(f"{player.name}", effect)
     
     while not myturn:
         #computer turn here
