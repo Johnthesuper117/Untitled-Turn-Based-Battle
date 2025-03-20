@@ -14,7 +14,7 @@ print("\nHow to play:\nFirst, before the battle starts, you select one attack fo
 #sleep(3)
 print("\nRules: Both players have 1000 health, or HP and 2 stamina points, or SP. Each attack uses SP from 0.5 to 2. You regain all SP at the end of your turn. Finishers can only be used once per player when they have 500 HP or less, and it uses 2 SP.")
 #sleep(3)
-print("\nEffects: \nBurn: lose 50 HP at the end of your turn, lasts 3 turns\nPoison: lose 30 HP at the end of your turn, lasts 5 turns\nBleed: lose 10 HP every turn + 10 HP for every hit taken, lasts 10 turns or until healed\nSummon: at the end of your turn, lose 100 HP\n")
+print("\nEffects: \nBurn: lose 50 HP at the end of your turn, lasts 3 turns\nPoison: lose 30 HP at the end of your turn, lasts 5 turns\nBleed: lose 10 HP every turn, lose -10 HP for every hit taken, lasts 10 turns or until healed\nSummon: at the end of your turn, lose 100 HP\n")
 #sleep(3)
 print("\nWhen the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP")
 #sleep(3)
@@ -72,39 +72,46 @@ Dagger = Action("", "weapon", 0, 50, 1, 100, "")
 BowandArrow = Action("", "weapon", 0, 20, 1, 20, "multiHit")
 Guantlets = Action("", "weapon", 0, 80, 1, 100, "")
 Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
+Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
+Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
+Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
+Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
 Armor = Action("", "shield", 0, 0, 1, 100, "armor")
 Heal = Action("", "potion", 100, 0, 1, 100, "")
 LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 
-Moves = {"SWORD": Sword, "HAMMER": Hammer, "DAGGER": Dagger, "BOW AND ARROW": BowandArrow, "GUANTLETS": Guantlets, "IGNIS": Ignis, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution}
+Moves = {"SWORD": Sword, "HAMMER": Hammer, "DAGGER": Dagger, "BOW AND ARROW": BowandArrow, "GUANTLETS": Guantlets, "IGNIS": Ignis, "IGNIS": Ignis, "IGNIS": Ignis, "IGNIS": Ignis, "IGNIS": Ignis, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution}
 
 #player chooses moves
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
-
+"""
+Tun into function so that incorrect inputs don't crash game, but instead just redo the function
+"""
 player.moveset[0] = str(input(f"Select a Weapon: \nSword(1): deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer(2): 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger(3): deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow(4): hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets(5): deals 70 HP, 1 SP\n"))
 #sleep(0.5)
-if player.moveset[0] != weapons[0] or player.moveset[1] != weapons[1] or player.moveset[2] != weapons[2] or player.moveset[3] != weapons[3] or player.moveset[4] != weapons[4]:
+if player.moveset[0].is_integer() == False and player.moveset[0] != weapons[0] or player.moveset[1] != weapons[1] or player.moveset[2] != weapons[2] or player.moveset[3] != weapons[3] or player.moveset[4] != weapons[4]:
     player.moveset[0] = weapons[int(player.moveset[0])-1]
 
 player.moveset[1] = str(input(f"Select a Spell: \nIgnis(1): deals 30 HP, 50% chance to inflict burn, 1 SP\nGlacies(2): deals 30 HP, opponent loses 1/2 SP, 1 SP \nTempestas(3): hits 1 to 3 times, each hit deals 30 HP, 1 SP\nVenenum(4): deals 30 HP, 50% chance to inflict poison, 1 SP\nVocare(5): deals 30 HP, inflicts summon effect, 1 SP\n"))
 #sleep(0.5)
-if player.moveset[1] != spells[0] or player.moveset[1] != spells[1] or player.moveset[2] != spells[2] or player.moveset[3] != spells[3] or player.moveset[4] != spells[4]:
+if player.moveset[1].is_integer() == False and player.moveset[1] != spells[0] or player.moveset[1] != spells[1] or player.moveset[2] != spells[2] or player.moveset[3] != spells[3] or player.moveset[4] != spells[4]:
     player.moveset[1] = spells[int(player.moveset[1])-1]
 
 player.moveset[2] = str(input(f"Select a Shield: \nArmor(1): next weapon attack deals 50 less HP\nBarrier(2): next spell attack deals 50 less HP\n"))
 #sleep(0.5)
-if player.moveset[2] != shields[0] or player.moveset[2] != shields[1]:
+if player.moveset[2].is_integer() == False and player.moveset[2] != shields[0] or player.moveset[2] != shields[1]:
     player.moveset[2] = shields[int(player.moveset[2])-1]
 
 player.moveset[3] = str(input(f"Select a Potion: \nHeal(1): heal 100 HP\nRegen(2): for the next 3 turns, heal 50 HP\nCure(3): heal 50 HP and remove effects\n"))
 #sleep(0.5)
-if player.moveset[3] != potions[0] or player.moveset[3] != potions[1] or player.moveset[3] != potions[2]:
+if player.moveset[3].is_integer() == False and player.moveset[3] != potions[0] or player.moveset[3] != potions[1] or player.moveset[3] != potions[2]:
     player.moveset[3] = potions[int(player.moveset[3])-1]
 
 player.moveset[4] = str(input(f"Select a Finisher: \nLethal Execution(1): deals 500 HP, inflicts bleed, 2 SP\nMagus Exponentia Inspiratione(2): hits 1-3 times, each hit deals 200 HP, inflicts burn and poison, opponent loses 1/2 SP, 2 SP\nSteel-Fist Beatdown(3): hits 1-10 times, each hit deals 100 HP, 2 SP\n"))
 #sleep(0.5)
-if player.moveset[4] != finishers[0] or player.moveset[4] != finishers[1] or player.moveset[4] != finishers[2]:
+if player.moveset[4].is_integer() == False and player.moveset[4] != finishers[0] or player.moveset[4] != finishers[1] or player.moveset[4] != finishers[2]:
     player.moveset[4] = finishers[int(player.moveset[4])-1]
+
 print(f"{player.moveset[0]}(1), {player.moveset[1]}(2), {player.moveset[2]}(3), {player.moveset[3]}(4), {player.moveset[4]}(5)")
 
 #bot chooses moves
@@ -128,9 +135,10 @@ cpu.moveset[4] = finishers[randomNum-1]
 #set up functions
 def Attack(turn, type, damage, effect):
     if turn == "PLAYER":
-        damage -= cpu.defence
-        cpu.defence = 0
-        print(f"{player.name} Broke CPU's Defences")
+        if cpu.defence > 1:
+            damage -= cpu.defence
+            cpu.defence = 0
+            print(f"{player.name} Broke CPU's Defences")
         if damage <= 0:
             pass
         if cpu.bleed.turns > 0:
@@ -141,6 +149,16 @@ def Attack(turn, type, damage, effect):
         if effect.upper() == "BLEED":
             cpu.bleed == Effect("Bleed", -10, 10)
             print("CPU is bleeding")
+        elif effect.upper() == "BURN":
+            cpu.bleed == Effect("Burn", -50, 3)
+            print("CPU is burning")
+        elif effect.upper() == "POSION":
+            cpu.bleed == Effect("Posion", -30, 5)
+            print("CPU is posioned")
+        elif effect.upper() == "SUMMON":
+            cpu.bleed == Effect("Summon", -100, 1)
+            print("")
+        
 
 run = True #flag that keeps the game running
 myturn = True #flag that tracks turn
