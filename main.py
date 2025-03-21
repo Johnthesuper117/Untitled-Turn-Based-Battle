@@ -150,8 +150,8 @@ randomNum = random.randint(1,3)
 cpu.moveset[4] = finishers[randomNum-1]
 
 #set up functions
-def Attack(turn, type, damage, effect):
-    if turn == "PLAYER":
+def Attack(attacker, victom,  type, damage, effect):
+    if a == "PLAYER":
         if cpu.defence > 1:
             damage -= cpu.defence
             cpu.defence = 0
