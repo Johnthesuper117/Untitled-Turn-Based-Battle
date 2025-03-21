@@ -201,7 +201,7 @@ while run and player.hp > 0 and cpu.hp > 0:
         print(attack)
         if attack != player.moveset[0] or attack != player.moveset[1] or attack != player.moveset[2] or attack != player.moveset[3] or attack != player.moveset[4] and attack.upper() != "END":
             attack = player.moveset[int(attack)-1]
-        if attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
+        elif attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
             Attack("PLAYER", Moves[attack].type, Moves[attack].damage, Moves[attack].effect)
         elif attack.upper() == 'END' or player.sp == 0:
@@ -215,6 +215,8 @@ while run and player.hp > 0 and cpu.hp > 0:
         print("CPU's turn")
         
         #conditions to end turn: skip the rest of your turn or run out of stamina
+        for effect in player.effects:
+            Status(f"{player.name}", effect)
         myturn = True
     
 #print gameover: 
