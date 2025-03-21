@@ -48,18 +48,18 @@ class Player:
         self.moveset = [weapon, spell, shield, potion, finisher]
         self.effects = []
 
-    @classmethod
-    def Effects():
-        if self.bleed.turns > 0:
-            self.effects.append(f"{self.bleed.name}")
-        if self.burn.turns > 0:
-            self.effects.append(f"{self.burn.name}")
-        if self.poison.turns > 0:
-            self.effects.append(f"{self.poison.name}")
-        if self.summon.turns > 0:
-            self.effects.append(f"{self.summon.name}")
-        if self.regen.turns > 0:
-            self.effects.append(f"{self.regen.name}")
+        @classmethod
+        def Effects():
+            if self.bleed.turns > 0:
+                self.effects.append(f"{self.bleed.name}")
+            if self.burn.turns > 0:
+                self.effects.append(f"{self.burn.name}")
+            if self.poison.turns > 0:
+                self.effects.append(f"{self.poison.name}")
+            if self.summon.turns > 0:
+                self.effects.append(f"{self.summon.name}")
+            if self.regen.turns > 0:
+                self.effects.append(f"{self.regen.name}")
             
 
 class Action:
