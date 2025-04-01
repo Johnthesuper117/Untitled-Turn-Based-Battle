@@ -24,18 +24,21 @@ print("\nWhen the battle starts, type the attack you want to use and hit enter t
 who = ""
 
 class Effect:
-    def __init__(self, name:str, healthchange:int, turns:int):
+    def __init__(self, name:str, defenceType:str, healthchange:int, defence:int, turns:int):
         self.name = name
         self.active = False
         self.turns = turns
         self.healthchange = healthchange
+        self.defenceType = defenceType
+        self.defence = defence
         pass
 
 class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
-        self.defence = 0
+        self.pDefence = 0
+        self.sDefence = 0
         self.sp = 2.0
         self.bleed = Effect("Bleed", 0, 0)
         self.burn = Effect("Burn", 0, 0)
@@ -89,13 +92,18 @@ Dagger = Action("", "weapon", 0, 50, 1, 100, "")
 BowandArrow = Action("", "weapon", 0, 20, 1, 20, "multiHit")
 Guantlets = Action("", "weapon", 0, 80, 1, 100, "")
 Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
-Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
-Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
-Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
-Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
-Armor = Action("", "shield", 0, 0, 1, 100, "armor")
+Glacies = Action("", "spell", 0, 30, 1, 50, "Burn")
+Tempestas = Action("", "spell", 0, 30, 1, 50, "Burn")
+Venenum = Action("", "spell", 0, 30, 1, 50, "Burn")
+Vocare = Action("", "spell", 0, 30, 1, 50, "Burn")
+Armor = Action("", "shield", 0, 0, 1, 100, "Armor")
+Barrier = Action("", "shield", 0, 0, 1, 100, "Barrier")
 Heal = Action("", "potion", 100, 0, 1, 100, "")
+Regen = Action("", "potion", 100, 0, 1, 100, "Regen")
+Cure = Action("", "potion", 100, 0, 1, 100, "Cure")
 LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
+Magus Exponentia Inspiratione = Action("", "finisher", 0, 500, 2, 100, "Bleed")
+Steel-Fist Beatdown = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 
 Moves = {"SWORD": Sword, "HAMMER": Hammer, "DAGGER": Dagger, "BOW AND ARROW": BowandArrow, "GUANTLETS": Guantlets, "IGNIS": Ignis, "IGNIS": Ignis, "IGNIS": Ignis, "IGNIS": Ignis, "IGNIS": Ignis, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution}
 
@@ -149,9 +157,16 @@ cpu.moveset[3] = potions[randomNum-1]
 randomNum = random.randint(1,3)
 cpu.moveset[4] = finishers[randomNum-1]
 
+stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POISON": player.poison, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOISON": cpu.poison, "CPUSUMMON": cpu.summon}
+messages = {"BLEED": f"{who} is weakened by the loss of blood", "BURN": f"{who}'s burns cause severe pain", "POISON": f"{who} is impaired by the toxins", "SUMMON": f"The wild beast maims {who}", }
+
+
 #set up functions
-def Attack(attacker, victom,  type, damage, effect):
-    if a == "PLAYER":
+def Attack(attacker, victom, type, damage, effect):  
+    stats[attacker]
+    stats[victom].hp -= abs(damage - stats[victom].defence)
+    #make a nice flow for attacking, may need to include more dictionaries
+    if attacker == "PLAYER":
         if cpu.defence > 1:
             damage -= cpu.defence
             cpu.defence = 0
@@ -175,9 +190,6 @@ def Attack(attacker, victom,  type, damage, effect):
         elif effect.upper() == "SUMMON":
             cpu.bleed = Effect("Summon", -100, 1)
             print(f"{player.name} summoned a wild beast")
-
-stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POISON": player.poison, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOISON": cpu.poison, "CPUSUMMON": cpu.summon}
-messages = {"BLEED": f"{who} is weakened by the loss of blood", "BURN": f"{who}'s burns cause severe pain", "POISON": f"{who} is impaired by the toxins", "SUMMON": f"The wild beast maims {who}", }
 
 def Status(who, effect):
     
@@ -203,7 +215,7 @@ while run and player.hp > 0 and cpu.hp > 0:
             attack = player.moveset[int(attack)-1]
         elif attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
-            Attack("PLAYER", Moves[attack].type, Moves[attack].damage, Moves[attack].effect)
+            Attack(player.name, cpu.name, Moves[attack].type, Moves[attack].damage, Moves[attack].effect)
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
             print("End of Player's Turn")
