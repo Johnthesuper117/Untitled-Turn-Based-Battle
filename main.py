@@ -138,7 +138,7 @@ player.moveset[1] = str(input(f"Select a Spell: \nIgnis(1): deals 30 HP, 50% cha
 if type(player.moveset[1]) == int and player.moveset[1] != spells[0] or player.moveset[1] != spells[1] or player.moveset[2] != spells[2] or player.moveset[3] != spells[3] or player.moveset[4] != spells[4]:
     player.moveset[1] = spells[int(player.moveset[1])-1]
 
-player.moveset[2] = str(input(f"Select a Shield: \nArmor(1): next weapon attack deals 50 less HP\nBarrier(2): next spell attack deals 50 less HP\n"))
+player.moveset[2] = str(input(f"Select a Shield: \nArmor(1): next weapon attack deals 50 less HP\nBarrier(2): next spell attack deals 50 less HP\n")) #change for better gameplay
 #sleep(0.5)
 if type(player.moveset[2]) == int and player.moveset[2] != shields[0] or player.moveset[2] != shields[1]:
     player.moveset[2] = shields[int(player.moveset[2])-1]
@@ -192,19 +192,20 @@ messages = {
     "FREEZE1": f"{who}'s movements have been slowed down"
     "POISON1": f"{who} is impaired by the toxins", 
     "SUMMON1": f"The wild beast maims {who}", 
-    "BLEED2": f"{who} is weakened by the loss of blood", 
-    "BURN2": f"{who}'s burns cause severe pain", 
-    "FREEZE2": f"{who}'s movements have been slowed down"
-    "POISON2": f"{who} is impaired by the toxins", 
-    "SUMMON2": f"The wild beast maims {who}", 
-    
+    "BLEED2": f"{who} is bleeding", 
+    "BURN2": f"{who} is burning", 
+    "FREEZE2": f"{who} is frozen"
+    "POISON2": f"{who} is poisoned", 
+    "SUMMON2": f"{who} is attacked by a wild beast",     
 }
 
 
 #set up functions
 def Attack(attacker, victom, type, damage, effect):  
     stats[attacker]
-    stats[victom].hp -= abs(damage - stats[victom].defence)
+    damage = abs(damage - stats[victom].defence)
+    stats[victom].hp -= damage
+    print(f"{stats[victom]} took {damage}")
     #make a nice flow for attacking, may need to include more dictionaries
     if attacker == "PLAYER":
         if cpu.defence > 1:
