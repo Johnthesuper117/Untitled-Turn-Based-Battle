@@ -105,7 +105,23 @@ LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 MagusExponentiaInspiratione = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 Steel-FistBeatdown = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 
-Moves = {"SWORD": Sword, "HAMMER": Hammer, "DAGGER": Dagger, "BOW AND ARROW": BowandArrow, "GUANTLETS": Guantlets, "IGNIS": Ignis, "GLACIES": Glacies, "TEMPESTAS": Tempestas, "VENENUM": Venenum, "VOCARE": Vocare, "ARMOR": Armor, "HEAL": Heal, "LETHAL EXECUTION": LethalExecution, "MAGUSEXPONENTIAINSPIRATIONE": MagusExponentiaInspiratione, "STEELFISTBEATDOWN": Steel-FistBeatdown}
+Moves = {
+    "SWORD": Sword, 
+    "HAMMER": Hammer, 
+    "DAGGER": Dagger, 
+    "BOW AND ARROW": BowandArrow, 
+    "GUANTLETS": Guantlets, 
+    "IGNIS": Ignis, 
+    "GLACIES": Glacies, 
+    "TEMPESTAS": Tempestas, 
+    "VENENUM": Venenum, 
+    "VOCARE": Vocare, 
+    "ARMOR": Armor, 
+    "HEAL": Heal, 
+    "LETHAL EXECUTION": LethalExecution, 
+    "MAGUSEXPONENTIAINSPIRATIONE": MagusExponentiaInspiratione, 
+    "STEELFISTBEATDOWN": Steel-FistBeatdown
+}
 
 #player chooses moves
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
@@ -157,8 +173,32 @@ cpu.moveset[3] = potions[randomNum-1]
 randomNum = random.randint(1,3)
 cpu.moveset[4] = finishers[randomNum-1]
 
-stats = {f"{player.name}": player, f"{player.name}BLEED": player.bleed, f"{player.name}BURN": player.burn, f"{player.name}POISON": player.poison, f"{player.name}SUMMON": player.summon, "CPU": cpu, "CPUBLEED": cpu.bleed, "CPUBURN": cpu.burn, "CPUPOISON": cpu.poison, "CPUSUMMON": cpu.summon}
-messages = {"BLEED": f"{who} is weakened by the loss of blood", "BURN": f"{who}'s burns cause severe pain", "POISON": f"{who} is impaired by the toxins", "SUMMON": f"The wild beast maims {who}", }
+stats = {
+    f"{player.name}": player, 
+    f"{player.name}BLEED": player.bleed, 
+    f"{player.name}BURN": player.burn, f
+    "{player.name}POISON": player.poison, 
+    f"{player.name}SUMMON": player.summon, 
+    "CPU": cpu, 
+    "CPUBLEED": cpu.bleed, 
+    "CPUBURN": cpu.burn, 
+    "CPUPOISON": cpu.poison, 
+    "CPUSUMMON": cpu.summon
+}
+
+messages = {
+    "BLEED1": f"{who} is weakened by the loss of blood", 
+    "BURN1": f"{who}'s burns cause severe pain", 
+    "FREEZE1": f"{who}'s movements have been slowed down"
+    "POISON1": f"{who} is impaired by the toxins", 
+    "SUMMON1": f"The wild beast maims {who}", 
+    "BLEED2": f"{who} is weakened by the loss of blood", 
+    "BURN2": f"{who}'s burns cause severe pain", 
+    "FREEZE2": f"{who}'s movements have been slowed down"
+    "POISON2": f"{who} is impaired by the toxins", 
+    "SUMMON2": f"The wild beast maims {who}", 
+    
+}
 
 
 #set up functions
