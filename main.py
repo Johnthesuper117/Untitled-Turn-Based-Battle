@@ -24,14 +24,20 @@ print("\nWhen the battle starts, type the attack you want to use and hit enter t
 who = ""
 
 class Effect:
-    def __init__(self, name:str, defenceType:str, healthchange:int, defence:int, turns:int):
+    def __init__(self, name:str, healthchange:int, turns:int):
         self.name = name
-        self.active = False
         self.turns = turns
         self.healthchange = healthchange
-        self.defenceType = defenceType
-        self.defence = defence
         pass
+
+Bleed = Effect("Bleed", -10, 10)
+Burn = Effect("Burn", 50, 3)
+
+effectList = {
+    "BLEED": Bleed
+    "BURN": Burn
+    "FREEZE": Freeze
+}
 
 class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
@@ -53,16 +59,9 @@ class Player:
 
         @classmethod
         def Effects():
-            if self.bleed.turns > 0:
-                self.effects.append(f"{self.bleed.name}")
-            if self.burn.turns > 0:
-                self.effects.append(f"{self.burn.name}")
-            if self.poison.turns > 0:
-                self.effects.append(f"{self.poison.name}")
-            if self.summon.turns > 0:
-                self.effects.append(f"{self.summon.name}")
-            if self.regen.turns > 0:
-                self.effects.append(f"{self.regen.name}")
+            for effect in effectList:
+                if effectList[effect].turns > 0:
+                    self.effects.append(f"{effectList[effect].name}")
             
 
 class Action:
@@ -102,8 +101,8 @@ Heal = Action("", "potion", 100, 0, 1, 100, "")
 Regen = Action("", "potion", 50, 0, 1, 100, "Regen")
 Cure = Action("", "potion", 100, 0, 1, 100, "Cure")
 LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
-MagusExponentiaInspiratione = Action("", "finisher", 0, 500, 2, 100, "Bleed")
-Steel-FistBeatdown = Action("", "finisher", 0, 500, 2, 100, "Bleed")
+MagusExponentiaInspiratione = Action("", "finisher", 0, 500, 2, 100, "All")
+Steel-FistBeatdown = Action("", "finisher", 0, 500, 2, 100, "")
 
 Moves = {
     "SWORD": Sword, 
@@ -138,7 +137,7 @@ player.moveset[1] = str(input(f"Select a Spell: \nIgnis(1): deals 30 HP, 50% cha
 if type(player.moveset[1]) == int and player.moveset[1] != spells[0] or player.moveset[1] != spells[1] or player.moveset[2] != spells[2] or player.moveset[3] != spells[3] or player.moveset[4] != spells[4]:
     player.moveset[1] = spells[int(player.moveset[1])-1]
 
-player.moveset[2] = str(input(f"Select a Shield: \nArmor(1): next weapon attack deals 50 less HP\nBarrier(2): next spell attack deals 50 less HP\n")) #change for better gameplay
+player.moveset[2] = str(input(f"Select a Shield: \nArmor(1): next attack deals 50 less HP\nBarrier(2): next attack doesn't inflict any effects\n")) #change for better gameplay
 #sleep(0.5)
 if type(player.moveset[2]) == int and player.moveset[2] != shields[0] or player.moveset[2] != shields[1]:
     player.moveset[2] = shields[int(player.moveset[2])-1]
@@ -176,8 +175,8 @@ cpu.moveset[4] = finishers[randomNum-1]
 stats = {
     f"{player.name}": player, 
     f"{player.name}BLEED": player.bleed, 
-    f"{player.name}BURN": player.burn, f
-    "{player.name}POISON": player.poison, 
+    f"{player.name}BURN": player.burn, 
+    f"{player.name}POISON": player.poison, 
     f"{player.name}SUMMON": player.summon, 
     "CPU": cpu, 
     "CPUBLEED": cpu.bleed, 
@@ -206,31 +205,9 @@ def Attack(attacker, victom, type, damage, effect):
     damage = abs(damage - stats[victom].defence)
     stats[victom].hp -= damage
     print(f"{stats[victom]} took {damage}")
+    if effect:
+       stats[f"{who}{effect}"].turns = effectList[{effect}].upper().turns 
     #make a nice flow for attacking, may need to include more dictionaries
-    if attacker == "PLAYER":
-        if cpu.defence > 1:
-            damage -= cpu.defence
-            cpu.defence = 0
-            print(f"{player.name} Broke CPU's Defences")
-        if damage <= 0:
-            pass
-        if cpu.bleed.turns > 0:
-            damage += 10
-            print("CPU's wounds deepen")
-        cpu.hp -= damage
-        print(f"CPU took {damage}")
-        if effect.upper() == "BLEED":
-            cpu.bleed = Effect("Bleed", -10, 10)
-            print("CPU is bleeding")
-        elif effect.upper() == "BURN":
-            cpu.bleed = Effect("Burn", -50, 3)
-            print("CPU is burning")
-        elif effect.upper() == "POISON":
-            cpu.bleed = Effect("Poison", -30, 5)
-            print("CPU is poisoned")
-        elif effect.upper() == "SUMMON":
-            cpu.bleed = Effect("Summon", -100, 1)
-            print(f"{player.name} summoned a wild beast")
 
 def Status(who, effect):
     
