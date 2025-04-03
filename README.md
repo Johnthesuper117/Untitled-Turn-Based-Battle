@@ -1,6 +1,6 @@
-# Untitled-Turn-Based-Battle
+# Untitled-Turn-Based-Battle (W.I.P.)
 
-Untitled-Turn-Based-Battle, or UTBB, is a game where you make a moveset out of a list of options, and then you fight your opponent using said moveset. 
+Untitled-Turn-Based-Battle, or UTBB, is a game where you make a moveset out of a list of options, and then you fight your opponent using said moveset. Currently a work in progress
 
 How to play:
 
@@ -14,6 +14,8 @@ Effects:
  - Bleed: lose 10 HP every turn + 10 HP for every hit taken, lasts 10 turns or until healed
 
  - Burn: lose 50 HP at the end of your turn, lasts 3 turns
+
+ - Freeze: lose 1 SP for your next turn, last 1 turn
 
  - Poison: lose 30 HP at the end of your turn, lasts 5 turns
 
