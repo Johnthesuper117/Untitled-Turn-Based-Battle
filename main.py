@@ -3,6 +3,10 @@
 #import stuff
 import random, json
 from time import sleep
+import os
+
+if not os.path.exists(os.path.join(self.root, 'config.json')):
+    raise FileNotFoundError(f"unable to locate {os.path.join(self.root, 'config.json')}")
 
 with open('config.json') as config_file:
     config = json.load(config_file)
