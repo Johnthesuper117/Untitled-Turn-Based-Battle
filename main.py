@@ -35,12 +35,19 @@ class Effect:
         pass
 
 Bleed = Effect("Bleed", -10, 10)
-Burn = Effect("Burn", 50, 3)
+Burn = Effect("Burn", -50, 3)
+Freeze = Effect("Freeze", 0, 1)
+Poison = Effect("Poison", -30, 5)
+Summon = Effect("Summon", -100, 1)
+Regen = Effect("Regen", 20, 10)
 
 effectList = {
     "BLEED": Bleed
     "BURN": Burn
     "FREEZE": Freeze
+    "POISON": Poison
+    "SUMMON": Summon
+    "REGEN": Regen
 }
 
 class Player:
@@ -122,8 +129,8 @@ Moves = {
     "ARMOR": Armor, 
     "HEAL": Heal, 
     "LETHAL EXECUTION": LethalExecution, 
-    "MAGUSEXPONENTIAINSPIRATIONE": MagusExponentiaInspiratione, 
-    "STEELFISTBEATDOWN": Steel-FistBeatdown
+    "MAGUS EXPONENTIA INSPIRATIONE": MagusExponentiaInspiratione, 
+    "STEEL FIST BEATDOWN": Steel-FistBeatdown
 }
 
 #player chooses moves
