@@ -12,7 +12,7 @@
       "name": "HAMMER",
       "type": "weapon",
       "damage": 100,
-      "effect": null,
+      "effect": "hit",
       "stamina_cost": 1,
       "effect_chance": 50
     },
@@ -22,33 +22,48 @@
       "damage": 50,
       "effect": null,
       "stamina_cost": 0.5,
-      "effect_chance": 50
+      "effect_chance": 100
     },
     {
       "name": "BOW AND ARROW",
       "type": "weapon",
       "damage": 50,
-      "effect": "Bleed",
+      "effect": "multihit",
       "stamina_cost": 1,
-      "effect_chance": 50
+      "effect_chance": 20
     },
     {
       "name": "GAUNTLETS",
       "type": "weapon",
-      "damage": 50,
-      "effect": "Bleed",
+      "damage": 80,
+      "effect": "hit",
       "stamina_cost": 1,
-      "effect_chance": 50
+      "effect_chance": 100
     }
   ],
   
   "spells": [
     {
       "name": "IGNIS",
+      "type": "spell",
+      "damage": 50,
+      "effect": "Burn",
+      "stamina_cost": 1,
+      "effect_chance": 50
     }, 
     {
-      "GLACIES",
-    } "TEMPESTAS", "VENENUM", "VOCARE"],
+      "name": "GLACIES",
+    },
+    {
+      "name": "TEMPESTAS",
+    },
+    {
+      "name": "VENENUM",
+    },
+    {
+      "name": "VOCARE",
+    }
+  ],
   "shields": ["ARMOR", "BARRIER"],
   "potions": ["HEAL", "REGEN", "CURE"],
   "finishers": ["LETHAL EXECUTION", "MAGUS EXPONENTIA INSPIRATIONE", "STEEL-FIST BEATDOWN"]
@@ -75,16 +90,36 @@ SteelFistBeatdown = Action("", "finisher", 0, 500, 2, 100, "")
 {
   "messages": [
     {
-      "BLEED1": f"{who} is weakened by the loss of blood",
-    }
-     
-    "BURN1": f"{who}'s burns cause severe pain", 
-    "FREEZE1": f"{who}'s movements have been slowed down",
-    "POISON1": f"{who} is impaired by the toxins", 
-    "SUMMON1": f"The wild beast maims {who}", 
-    "BLEED2": f"{who} is bleeding", 
-    "BURN2": f"{who} is burning", 
-    "FREEZE2": f"{who} is frozen",
-    "POISON2": f"{who} is poisoned", 
-    "SUMMON2": f"{who} is attacked by a wild beast",     
+      "BLEED1": f"{who} is weakened by the loss of blood"
+    },
+    {
+      "BURN1": f"{who}'s burns cause severe pain" 
+    },
+    {
+      "BURN1": f"{who}'s burns cause severe pain"
+    },
+    {
+      "FREEZE1": f"{who}'s movements have been slowed down"
+    },
+    {
+      "POISON1": f"{who} is impaired by the toxins", 
+    },
+    {
+      "SUMMON1": f"The wild beast maims {who}"
+    }, 
+    {
+      "BLEED2": f"{who} is bleeding"
+    }, 
+    {
+      "BURN2": f"{who} is burning"
+    }, 
+    {
+      "FREEZE2": f"{who} is frozen"
+    },
+    {
+      "POISON2": f"{who} is poisoned"
+    }, 
+    {
+      "SUMMON2": f"{who} is attacked by a wild beast"
+    },     
 }
