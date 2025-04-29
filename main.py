@@ -20,6 +20,7 @@ def rules(x):
 # Load configuration
 def load_config():
     with open("config.json") as file:
+        print(json.load(file))
         return json.load(file)
 
 # Effects and Actions
