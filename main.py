@@ -18,11 +18,19 @@ def rules(x):
     sleep(x)
 
 # Load configuration
-def load_config():
-    with open("config.json") as file:
-        print(json.load(file))
-        return json.load(file)
+import json
 
+def load_config():
+    try:
+        with open("config.json", "r") as file:
+            return json.load(file)
+    except json.JSONDecodeError:
+        print("Error: The configuration file is empty or contains invalid JSON.")
+        return {}
+    except FileNotFoundError:
+        print("Error: Configuration file not found.")
+        return {}
+    
 # Effects and Actions
 class Effect:
     def __init__(self, name, healthchange, turns):
