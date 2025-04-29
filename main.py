@@ -136,7 +136,7 @@ Moves = {
 #player chooses moves
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
 """
-Tun into function so that incorrect inputs don't crash game, but instead just redo the function
+Turn into function so that incorrect inputs don't crash game, but instead just redo the function
 """
 player.moveset[0] = str(input(f"Select a Weapon: \nSword(1): deals 50 HP with 50% chance to inflict bleed, 1 SP\nHammer(2): 50% to deal 100 HP, 50% chance to do nothing, 1 SP\nDagger(3): deals 20 HP, 25% chance to bleed, 0.5 SP\nBow and Arrow(4): hits 1 to 5 times, each hit deals 20 HP, 1 SP\nGuantlets(5): deals 70 HP, 1 SP\n"))
 #sleep(0.5)
