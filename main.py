@@ -5,8 +5,8 @@ import random, json
 from time import sleep
 import os
 
-if not os.path.exists(os.path.join(self.root, 'config.json')):
-    raise FileNotFoundError(f"unable to locate {os.path.join(self.root, 'config.json')}")
+#if not os.path.exists(os.path.join(self.root, 'config.json')):
+    #raise FileNotFoundError(f"unable to locate {os.path.join(self.root, 'config.json')}")
 
 with open('config.json') as config_file:
     config = json.load(config_file)
@@ -42,11 +42,11 @@ Summon = Effect("Summon", -100, 1)
 Regen = Effect("Regen", 20, 10)
 
 effectList = {
-    "BLEED": Bleed
-    "BURN": Burn
-    "FREEZE": Freeze
-    "POISON": Poison
-    "SUMMON": Summon
+    "BLEED": Bleed,
+    "BURN": Burn,
+    "FREEZE": Freeze,
+    "POISON": Poison,
+    "SUMMON": Summon,
     "REGEN": Regen
 }
 
@@ -54,8 +54,7 @@ class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
         self.name = name
         self.hp = 1000
-        self.pDefence = 0
-        self.sDefence = 0
+        self.defence = 0
         self.sp = 2.0
         self.bleed = Effect("Bleed", 0, 0)
         self.burn = Effect("Burn", 0, 0)
@@ -113,7 +112,7 @@ Regen = Action("", "potion", 50, 0, 1, 100, "Regen")
 Cure = Action("", "potion", 100, 0, 1, 100, "Cure")
 LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
 MagusExponentiaInspiratione = Action("", "finisher", 0, 500, 2, 100, "All")
-Steel-FistBeatdown = Action("", "finisher", 0, 500, 2, 100, "")
+SteelFistBeatdown = Action("", "finisher", 0, 500, 2, 100, "")
 
 Moves = {
     "SWORD": Sword, 
@@ -130,7 +129,7 @@ Moves = {
     "HEAL": Heal, 
     "LETHAL EXECUTION": LethalExecution, 
     "MAGUS EXPONENTIA INSPIRATIONE": MagusExponentiaInspiratione, 
-    "STEEL FIST BEATDOWN": Steel-FistBeatdown
+    "STEEL FIST BEATDOWN": SteelFistBeatdown
 }
 
 #player chooses moves
@@ -199,12 +198,12 @@ stats = {
 messages = {
     "BLEED1": f"{who} is weakened by the loss of blood", 
     "BURN1": f"{who}'s burns cause severe pain", 
-    "FREEZE1": f"{who}'s movements have been slowed down"
+    "FREEZE1": f"{who}'s movements have been slowed down",
     "POISON1": f"{who} is impaired by the toxins", 
     "SUMMON1": f"The wild beast maims {who}", 
     "BLEED2": f"{who} is bleeding", 
     "BURN2": f"{who} is burning", 
-    "FREEZE2": f"{who} is frozen"
+    "FREEZE2": f"{who} is frozen",
     "POISON2": f"{who} is poisoned", 
     "SUMMON2": f"{who} is attacked by a wild beast",     
 }
@@ -217,7 +216,9 @@ def Attack(attacker, victom, type, damage, effect):
     stats[victom].hp -= damage
     print(f"{stats[victom]} took {damage}")
     if effect:
-       stats[f"{who}{effect}"].turns = effectList[{effect}].upper().turns 
+        print(f"{effect}")
+        print(f"{victom}")
+        stats[f"{victom}{effect.upper()}"].turns = effectList[f"{effect.upper()}"].turns 
     #make a nice flow for attacking, may need to include more dictionaries
 
 def Status(who, effect):
@@ -240,10 +241,11 @@ while run and player.hp > 0 and cpu.hp > 0:
         #conditions to end turn: skip the rest of your turn or run out of stamina
         attack = input("\nEnter attack:\n").upper()
         print(attack)
-        if attack != player.moveset[0] or attack != player.moveset[1] or attack != player.moveset[2] or attack != player.moveset[3] or attack != player.moveset[4] and attack.upper() != "END":
-            attack = player.moveset[int(attack)-1]
-        elif attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
+        if attack == player.moveset[0] or attack == player.moveset[1] or attack == player.moveset[2] or attack == player.moveset[3] or attack == player.moveset[4]:
             print(attack)
+            Attack(player.name, cpu.name, Moves[attack].type, Moves[attack].damage, Moves[attack].effect)
+        elif attack != player.moveset[0] or attack != player.moveset[1] or attack != player.moveset[2] or attack != player.moveset[3] or attack != player.moveset[4] and attack.upper() != "END":
+            attack = player.moveset[int(attack)-1]
             Attack(player.name, cpu.name, Moves[attack].type, Moves[attack].damage, Moves[attack].effect)
         elif attack.upper() == 'END' or player.sp == 0:
             myturn = False
