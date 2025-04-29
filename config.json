@@ -53,73 +53,117 @@
     }, 
     {
       "name": "GLACIES",
+      "type": "spell",
+      "damage": 50,
+      "effect": "Freeze",
+      "stamina_cost": 1,
+      "effect_chance": 50
     },
     {
       "name": "TEMPESTAS",
+      "type": "spell",
+      "damage": 50,
+      "effect": "multihit",
+      "stamina_cost": 1,
+      "effect_chance": 33
     },
     {
       "name": "VENENUM",
+      "type": "spell",
+      "damage": 50,
+      "effect": "Poison",
+      "stamina_cost": 1,
+      "effect_chance": 50
     },
     {
       "name": "VOCARE",
+      "type": "spell",
+      "damage": 50,
+      "effect": "Summon",
+      "stamina_cost": 1,
+      "effect_chance": 50
     }
   ],
-  "shields": ["ARMOR", "BARRIER"],
-  "potions": ["HEAL", "REGEN", "CURE"],
-  "finishers": ["LETHAL EXECUTION", "MAGUS EXPONENTIA INSPIRATIONE", "STEEL-FIST BEATDOWN"]
-}
-Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
-Hammer = Action("", "weapon", 0, 100, 1, 50, "hit")
-Dagger = Action("", "weapon", 0, 50, 1, 100, "")
-BowandArrow = Action("", "weapon", 0, 20, 1, 20, "multiHit")
-Guantlets = Action("", "weapon", 0, 80, 1, 100, "")
-Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
-Glacies = Action("", "spell", 0, 30, 1, 50, "Freeze")
-Tempestas = Action("", "spell", 0, 30, 1, 50, "multiHit")
-Venenum = Action("", "spell", 0, 30, 1, 50, "Posion")
-Vocare = Action("", "spell", 0, 30, 1, 50, "Summon")
-Armor = Action("", "shield", 0, 0, 1, 0, "Armor")
-Barrier = Action("", "shield", 0, 0, 1, 0, "Barrier")
-Heal = Action("", "potion", 100, 0, 1, 100, "")
-Regen = Action("", "potion", 50, 0, 1, 100, "Regen")
-Cure = Action("", "potion", 100, 0, 1, 100, "Cure")
-LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
-MagusExponentiaInspiratione = Action("", "finisher", 0, 500, 2, 100, "All")
-SteelFistBeatdown = Action("", "finisher", 0, 500, 2, 100, "")
-
-{
+  "shields": [
+    {
+      "name": "ARMOR",
+      "type": "shield",
+      "damage": 0,
+      "effect": "",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }, 
+    {
+      "name": "BARRIER",
+      "type": "shield",
+      "damage": 0,
+      "effect": "",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }],
+  "potions": [
+    {
+      "name": "HEAL",
+      "type": "potion",
+      "damage": 0,
+      "effect": "Heal",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }, 
+    {
+      "name": "REGEN",
+      "type": "potion",
+      "damage": 0,
+      "effect": "Regen",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }, 
+    {
+      "name": "CURE",
+      "type": "spell",
+      "damage": 0,
+      "effect": "Cure",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }
+  ],
+  "finishers": [
+    {
+      "name": "LETHAL EXECUTION",
+      "type": "spell",
+      "damage": 0,
+      "effect": "Cure",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }, 
+    {
+      "name": "MAGUS EXPONENTIA INSPIRATIONE",
+      "type": "spell",
+      "damage": 0,
+      "effect": "Cure",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }, 
+    {
+      "name": "STEEL-FIST BEATDOWN",
+      "type": "spell",
+      "damage": 0,
+      "effect": "Cure",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }],
   "messages": [
     {
-      "BLEED1": f"{who} is weakened by the loss of blood"
-    },
-    {
-      "BURN1": f"{who}'s burns cause severe pain" 
-    },
-    {
-      "BURN1": f"{who}'s burns cause severe pain"
-    },
-    {
-      "FREEZE1": f"{who}'s movements have been slowed down"
-    },
-    {
-      "POISON1": f"{who} is impaired by the toxins", 
-    },
-    {
-      "SUMMON1": f"The wild beast maims {who}"
-    }, 
-    {
-      "BLEED2": f"{who} is bleeding"
-    }, 
-    {
-      "BURN2": f"{who} is burning"
-    }, 
-    {
-      "FREEZE2": f"{who} is frozen"
-    },
-    {
-      "POISON2": f"{who} is poisoned"
-    }, 
-    {
-      "SUMMON2": f"{who} is attacked by a wild beast"
-    },     
+      "BLEED1": " is weakened by the loss of blood",
+      "BURN1": "'s burns cause severe pain",
+      "FREEZE1": "'s movements have been slowed down",
+      "POISON1": " is impaired by the toxins",
+      "SUMMON1": "The wild beast maims ",
+      "BLEED2": " is bleeding",
+      "BURN2": " is burning", 
+      "FREEZE2": " is frozen",
+      "POISON2": " is poisoned",
+      "SUMMON2": " is attacked by a wild beast"
+    }
+  ]
 }
