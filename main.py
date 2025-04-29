@@ -1,6 +1,7 @@
 #debug game and make sure every move works as intended, send to uncle Tim and David to test and give feedback, afterwards add finishing touches and last wave of testing, then release as finished version
 
 #import stuff
+from collections import deque
 import random, json
 from time import sleep
 import os
@@ -49,6 +50,23 @@ effectList = {
     "SUMMON": Summon,
     "REGEN": Regen
 }
+
+
+class Player:
+    def __init__(self, name, *args):
+        self.name = name
+        self.hp = 1000
+        self.active_effects = deque()
+    
+    def apply_effects(self):
+        for effect in list(self.active_effects):  # Iterate over a copy to allow safe removal
+            self.hp += effect.healthchange
+            effect.turns -= 1
+            if effect.turns <= 0:
+                self.active_effects.remove(effect)
+
+    def add_effect(self, effect):
+        self.active_effects.append(effect)
 
 class Player:
     def __init__(self, name:str, weapon:str, spell:str, shield:str, potion:str, finisher:str):
@@ -133,6 +151,49 @@ Moves = {
 }
 
 #player chooses moves
+def select_moveset(player_type, options):
+    if player_type == "player":
+        valid_selection = False
+        while not valid_selection:
+            try:
+                choice = int(input(options)) - 1
+                if choice < 0 or choice >= len(options):
+                    raise ValueError
+                valid_selection = True
+                return options[choice]
+            except ValueError:
+                print("Invalid choice. Please try again.")
+    else:  # CPU random selection
+        return random.choice(options)
+
+
+class Game:
+    def __init__(self):
+        self.player = None
+        self.cpu = None
+    
+    def setup(self):
+        self.player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
+        self.cpu = Player("CPU", 'weapon', 'spell', 'shield', 'potion', 'finisher')
+    
+    def select_player_moves(self):
+        print("Setting up Player moves...")
+        moves = [
+            weapons, spells, shields, potions, finishers
+        ]
+        for index, category in enumerate(moves):
+            self.player.moveset[index] = select_moveset("player", category)
+        print(f"Player's moveset: {self.player.moveset}")
+    
+    def select_cpu_moves(self):
+        print("Setting up CPU moves...")
+        moves = [
+            weapons, spells, shields, potions, finishers
+        ]
+        for index, category in enumerate(moves):
+            self.cpu.moveset[index] = select_moveset("cpu", category)
+        print(f"CPU's moveset: {self.cpu.moveset}")
+
 player = Player(input("Enter Username:\n"), 'weapon', 'spell', 'shield', 'potion', 'finisher')
 """
 Turn into function so that incorrect inputs don't crash game, but instead just redo the function
@@ -227,7 +288,24 @@ def Status(who, effect):
         stats[f"{who}"].hp -= stats[f"{who}{effect}"].healthchange
         print(f"{messages[effect]}")
         stats[f"{who}{effect}"].turns -= 1
-        
+
+
+def player_turn(player, cpu):
+    print("Player's turn")
+    attack = input("\nEnter attack:\n").upper()
+    if attack in player.moveset:
+        move = Moves[attack]
+        Attack(player.name, cpu.name, move.type, move.damage, move.effect)
+    else:
+        print("Invalid attack! Ending turn.")
+    player.apply_effects()
+
+def cpu_turn(cpu, player):
+    print("CPU's turn")
+    move = random.choice(cpu.moveset)
+    Attack(cpu.name, player.name, move.type, move.damage, move.effect)
+    cpu.apply_effects()
+
 
 run = True #flag that keeps the game running
 myturn = True #flag that tracks turn
@@ -268,3 +346,4 @@ if player.hp <= 0:
 
 if cpu.hp <=0:
     print("Computer died!")
+
