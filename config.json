@@ -1,6 +1,54 @@
 {
-  "weapons": ["SWORD", "HAMMER", "DAGGER", "BOW AND ARROW", "GAUNTLETS"],
-  "spells": ["IGNIS", "GLACIES", "TEMPESTAS", "VENENUM", "VOCARE"],
+  "weapons": [
+    {
+      "name": "SWORD",
+      "type": "weapon",
+      "damage": 50,
+      "effect": "Bleed",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    },
+    {
+      "name": "HAMMER",
+      "type": "weapon",
+      "damage": 100,
+      "effect": null,
+      "stamina_cost": 1,
+      "effect_chance": 50
+    },
+    {
+      "name": "DAGGER",
+      "type": "weapon",
+      "damage": 50,
+      "effect": null,
+      "stamina_cost": 0.5,
+      "effect_chance": 50
+    },
+    {
+      "name": "BOW AND ARROW",
+      "type": "weapon",
+      "damage": 50,
+      "effect": "Bleed",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    },
+    {
+      "name": "GAUNTLETS",
+      "type": "weapon",
+      "damage": 50,
+      "effect": "Bleed",
+      "stamina_cost": 1,
+      "effect_chance": 50
+    }
+  ],
+  
+  "spells": [
+    {
+      "name": "IGNIS",
+    }, 
+    {
+      "GLACIES",
+    } "TEMPESTAS", "VENENUM", "VOCARE"],
   "shields": ["ARMOR", "BARRIER"],
   "potions": ["HEAL", "REGEN", "CURE"],
   "finishers": ["LETHAL EXECUTION", "MAGUS EXPONENTIA INSPIRATIONE", "STEEL-FIST BEATDOWN"]
