@@ -28,7 +28,7 @@
       "name": "BOW AND ARROW",
       "type": "weapon",
       "damage": 50,
-      "effect": "multihit",
+      "effect": "multiHit",
       "stamina_cost": 1,
       "effect_chance": 20
     },
@@ -63,7 +63,7 @@
       "name": "TEMPESTAS",
       "type": "spell",
       "damage": 50,
-      "effect": "multihit",
+      "effect": "multiHit",
       "stamina_cost": 1,
       "effect_chance": 33
     },
@@ -120,7 +120,7 @@
     }, 
     {
       "name": "CURE",
-      "type": "spell",
+      "type": "potion",
       "damage": 0,
       "effect": "Cure",
       "stamina_cost": 1,
@@ -130,27 +130,27 @@
   "finishers": [
     {
       "name": "LETHAL EXECUTION",
-      "type": "spell",
-      "damage": 0,
-      "effect": "Cure",
-      "stamina_cost": 1,
-      "effect_chance": 50
+      "type": "finisher",
+      "damage": 500,
+      "effect": "Bleed",
+      "stamina_cost": 2,
+      "effect_chance": 100
     }, 
     {
       "name": "MAGUS EXPONENTIA INSPIRATIONE",
-      "type": "spell",
-      "damage": 0,
-      "effect": "Cure",
-      "stamina_cost": 1,
-      "effect_chance": 50
+      "type": "finisher",
+      "damage": 300,
+      "effect": "All",
+      "stamina_cost": 2,
+      "effect_chance": 33
     }, 
     {
       "name": "STEEL-FIST BEATDOWN",
-      "type": "spell",
-      "damage": 0,
-      "effect": "Cure",
-      "stamina_cost": 1,
-      "effect_chance": 50
+      "type": "finisher",
+      "damage": 100,
+      "effect": "multiHit",
+      "stamina_cost": 2,
+      "effect_chance": 10
     }],
   "messages": [
     {
