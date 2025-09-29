@@ -1,21 +1,25 @@
 #debug game and make sure every move works as intended, send to uncle Tim and David to test and give feedback, afterwards add finishing touches and last wave of testing, then release as finished version
-
 import os
 import json, random
 from collections import deque
 from time import sleep
 
+def lineBreak(x):
+    screen_width = os.get_terminal_size().columns
+    print("\n" + "-" * screen_width + "\n")
+    sleep(x)
+
 def rules(x):
     print("Hello and Welcome to Untitled Turn-Based Battle version Alpha")
-    sleep(x)
+    lineBreak(x)
     print("\nHow to play:\nFirst, before the battle starts, you select one attack for each category: Weapon, Spell, Shield, Potion, and Finisher. \nDuring the battle, you get to choose your attacks until you run out of stamina points. Then, your opponent does the same. This continues until one of the players lose all of their health, the one who remains is the winner!")
-    sleep(x)
+    lineBreak(x)
     print("\nRules: Both players have 1000 health, or HP and 2 stamina points, or SP. Each attack uses SP from 0.5 to 2. You regain all SP at the end of your turn. Finishers can only be used once per player when they have 500 HP or less, and it uses 2 SP.")
-    sleep(x)
+    lineBreak(x)
     print("\nEffects: \nBurn: lose 50 HP at the end of your turn, lasts 3 turns\nPoison: lose 30 HP at the end of your turn, lasts 5 turns\nBleed: lose 10 HP every turn, lose -10 HP for every hit taken, lasts 10 turns or until healed\nSummon: at the end of your turn, lose 100 HP\n")
-    sleep(x)
+    lineBreak(x)
     print("\nWhen the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP")
-    sleep(x)
+    lineBreak(x)
 
 # Load configuration
 import json
@@ -116,6 +120,7 @@ class Game:
 
     def player_turn(self):
         print(f"{self.player.name}'s turn")
+        lineBreak(1)
         print(f"Available moves: {self.player.moveset}")
         move_name = input("Enter your move: ").upper()
         if move_name in self.moves:
@@ -124,13 +129,16 @@ class Game:
         else:
             print("Invalid move!")
         self.player.apply_effects()
+        lineBreak(1)
 
     def cpu_turn(self):
         print("CPU's turn")
+        lineBreak(1)
         move_name = random.choice(self.cpu.moveset)
         move = self.moves[move_name]
         self.perform_attack(self.cpu, self.player, move)
         self.cpu.apply_effects()
+        lineBreak(1)
 
     def perform_attack(self, attacker, defender, move):
         if move.sp > attacker.sp:
@@ -154,6 +162,7 @@ class Game:
 
     def play(self):
         print("Starting the game!")
+        lineBreak(1)
         rules(0)
         self.setup_players()
         while True:
