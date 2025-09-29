@@ -11,24 +11,124 @@ Rules: Both players have 1000 health, or HP and 2 stamina points, or SP. Each at
 
 Moves:
 
- - Sword = Action("", "weapon", 0, 50, 1, 50, "Bleed")
- - Hammer = Action("", "weapon", 0, 100, 1, 50, "hit")
- - Dagger = Action("", "weapon", 0, 50, 1, 100, "")
- - BowandArrow = Action("", "weapon", 0, 20, 1, 20, "multiHit")
- - Guantlets = Action("", "weapon", 0, 80, 1, 100, "")
- - Ignis = Action("", "spell", 0, 30, 1, 50, "Burn")
- - Glacies = Action("", "spell", 0, 30, 1, 50, "Freeze")
- - Tempestas = Action("", "spell", 0, 30, 1, 50, "multiHit")
- - Venenum = Action("", "spell", 0, 30, 1, 50, "Posion")
- - Vocare = Action("", "spell", 0, 30, 1, 50, "Summon")
- - Armor = Action("", "shield", 0, 0, 1, 0, "Armor")
- - Barrier = Action("", "shield", 0, 0, 1, 0, "Barrier")
- - Heal = Action("", "potion", 100, 0, 1, 100, "")
- - Regen = Action("", "potion", 50, 0, 1, 100, "Regen")
- - Cure = Action("", "potion", 100, 0, 1, 100, "Cure")
- - LethalExecution = Action("", "finisher", 0, 500, 2, 100, "Bleed")
- - MagusExponentiaInspiratione = Action("", "finisher", 0, 500, 2, 100, "All")
- - SteelFistBeatdown = Action("", "finisher", 0, 500, 2, 100, "")
+ - Weapons
+     - SWORD
+         - Damage: 50
+         - Effect: Bleed
+         - Stamina Cost": 1
+         - Effect Chance: 50
+
+     - HAMMER
+         - Damage: 100
+         - Effect: hit
+         - Stamina Cost": 1
+         - Effect Chance": 50
+
+     - DAGGER",
+         - damage": 50,
+         - effect": null,
+         - stamina_cost": 0.5,
+         - effect_chance": 100
+
+     - BOW AND ARROW",
+         - damage": 50,
+         - effect": "multiHit",
+         - stamina_cost": 1,
+         - effect_chance": 20
+    
+       - GAUNTLETS",
+         - damage": 80,
+         - effect": "hit",
+         - stamina_cost": 1,
+         - effect_chance": 100
+
+ - Spells": 
+
+      - IGNIS",
+         - damage": 50,
+         - effect": "Burn",
+         - stamina_cost": 1,
+         - effect_chance": 50
+         
+     - GLACIES",
+         - damage": 50,
+         - effect": "Freeze",
+         - stamina_cost": 1,
+         - effect_chance": 50
+   
+     - TEMPESTAS",
+         - damage": 50,
+         - effect": "multiHit",
+         - stamina_cost": 1,
+         - effect_chance": 33
+
+     - VENENUM",
+         - damage": 50,
+         - effect": "Poison",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+     - VOCARE",
+         - damage": 50,
+         - effect": "Summon",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+ - Shields":
+
+     - ARMOR",
+         - damage": 0,
+         - effect": "",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+     - BARRIER",
+         - damage": 0,
+         - effect": "",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+ - potions":
+
+      - HEAL",
+         - damage": 0,
+         - effect": "Heal",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+     - REGEN",
+         - damage": 0,
+         - effect": "Regen",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+     - CURE",
+         - damage": 0,
+         - effect": "Cure",
+         - stamina_cost": 1,
+         - effect_chance": 50
+
+ - finishers": 
+
+     - LETHAL EXECUTION",
+         - damage": 500,
+         - effect": "Bleed",
+         - stamina_cost": 2,
+         - effect_chance": 100
+
+     - MAGUS EXPONENTIA INSPIRATIONE",
+         - Damage": 300,
+         - Effect": "All",
+         - Stamina_cost": 2,
+         - Effect_chance": 33
+
+     - STEEL-FIST BEATDOWN
+         - Damage: 100
+         - effect: "multiHit
+         - Stamina Cost: 2
+         - Effect Chance: 10
+
+
 
 Effects: 
 
@@ -41,5 +141,6 @@ Effects:
  - Poison: lose 30 HP at the end of your turn, lasts 5 turns
 
  - Summon: at the end of your turn, lose 100 HP
+
 
 When the battle starts, type the attack you want to use and hit enter to use it if posible, enter 'end' to end your turn when you are out of SP
