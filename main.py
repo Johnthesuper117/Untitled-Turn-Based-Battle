@@ -43,7 +43,7 @@ EFFECT_STATS = {
     "Summon": {"healthchange": -100, "turns": 1},
     "Freeze": {"healthchange": 0, "turns": 2}, 
     "Regen": {"healthchange": 25, "turns": 5}, 
-    "Heal": {"healthchange": 200, "turns": 1}  
+    "Heal": {"healthchange": 200, "turns": 1}
 }
 
 class Effect:
