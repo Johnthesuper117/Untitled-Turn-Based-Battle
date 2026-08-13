@@ -5,7 +5,6 @@ from collections import deque
 from time import sleep
 
 def lineBreak(x):
-    # Fallback to 80 if get_terminal_size fails (common in some IDEs)
     try:
         screen_width = os.get_terminal_size().columns
     except OSError:
@@ -27,13 +26,13 @@ def rules(x):
 
 def load_config():
     try:
-        with open("Data/data.json", "r") as file:
+        with open("config.json", "r") as file:
             return json.load(file)
     except json.JSONDecodeError:
         print("Error: The configuration file is empty or contains invalid JSON.")
         return {}
     except FileNotFoundError:
-        print("Error: Configuration file not found. Make sure Data/data.json exists!")
+        print("Error: Configuration file not found. Make sure config.json exists!")
         return {}
 
 # Dictionary mapping effect names to their stats based on your rules
@@ -41,7 +40,10 @@ EFFECT_STATS = {
     "Burn": {"healthchange": -50, "turns": 3},
     "Poison": {"healthchange": -30, "turns": 5},
     "Bleed": {"healthchange": -10, "turns": 10},
-    "Summon": {"healthchange": -100, "turns": 1}
+    "Summon": {"healthchange": -100, "turns": 1},
+    "Freeze": {"healthchange": 0, "turns": 2}, 
+    "Regen": {"healthchange": 25, "turns": 5}, 
+    "Heal": {"healthchange": 200, "turns": 1}  
 }
 
 class Effect:
@@ -78,7 +80,6 @@ class Player:
                 self.effects.remove(effect)
 
     def add_effect(self, effect):
-        # Create a fresh instance of the effect so turns track properly
         new_effect = Effect(effect.name, effect.healthchange, effect.turns)
         self.effects.append(new_effect)
 
@@ -101,10 +102,9 @@ class Game:
                     stats = EFFECT_STATS[effect_name]
                     effect = Effect(effect_name, stats["healthchange"], stats["turns"])
                 
-                # Store the move key as UPPERCASE so it matches user input easily
                 moves[item["name"].upper()] = Action(
                     item["name"], 
-                    category, # Using category as type
+                    category, 
                     item.get("damage", 0), 
                     item.get("stamina_cost", 1.0), 
                     effect, 
@@ -135,7 +135,6 @@ class Game:
     def select_move(self, options):
         while True:
             for i, option in enumerate(options, 1):
-                # Show stamina cost and damage dynamically if you want!
                 print(f"{i}. {option}")
             try:
                 choice = int(input("> ")) - 1
@@ -147,7 +146,7 @@ class Game:
                 print("Invalid input. Please enter a number.")
 
     def player_turn(self):
-        self.player.sp = 2.0 # Regain SP at start of turn
+        self.player.sp = 2.0 
         print(f"\n=== {self.player.name}'s Turn ===")
         
         while self.player.sp > 0:
@@ -175,7 +174,6 @@ class Game:
         print(f"CPU HP: {self.cpu.hp}/1000")
         
         while self.cpu.sp > 0:
-            # CPU logic: filter out moves it can't afford or can't use
             valid_moves = []
             for m_name in self.cpu.moveset:
                 m = self.moves[m_name]
@@ -185,12 +183,12 @@ class Game:
                     valid_moves.append(m_name)
                     
             if not valid_moves:
-                break # CPU ends turn if it can't afford anything
+                break 
                 
             move_name = random.choice(valid_moves)
             move = self.moves[move_name]
             self.perform_attack(self.cpu, self.player, move)
-            sleep(1) # Small delay so the player can read what happened
+            sleep(1)
             
             if self.check_game_over():
                 return
@@ -208,23 +206,26 @@ class Game:
                 print(f"{attacker.name} has already used their Finisher this battle!")
                 return False
 
-        # Stamina Check
         if move.sp > attacker.sp:
             print(f"{attacker.name} does not have enough SP to use {move.name}! (Costs {move.sp})")
             return False
-            
-        # Execute Attack
-        attacker.sp -= move.sp
-        defender.hp -= move.damage
-        print(f"> {attacker.name} used {move.name} and dealt {move.damage} damage to {defender.name}!")
         
-        if move.type == "finishers":
+        attacker.sp -= move.sp
+        
+        if move.type in ["potion", "potions", "shield", "shields"]:
+            target = attacker 
+            print(f"> {attacker.name} used {move.name}!")
+        else:
+            defender.hp -= move.damage
+            target = defender
+            print(f"> {attacker.name} used {move.name} and dealt {move.damage} damage to {defender.name}!")
+        
+        if move.type == "finisher" or move.type == "finishers":
             attacker.used_finisher = True
             
-        # Effect Check
         if move.effect and random.randint(1, 100) <= move.effect_chance:
-            defender.add_effect(move.effect)
-            print(f"> {defender.name} is now affected by {move.effect.name}!")
+            target.add_effect(move.effect)
+            print(f"> {target.name} is now affected by {move.effect.name}!")
             
         return True
 
@@ -254,7 +255,6 @@ class Game:
             if self.check_game_over():
                 break
 
-# How to actually run the game at the bottom of the file
 if __name__ == "__main__":
     config_data = load_config()
     if config_data:
